@@ -1,0 +1,265 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/somecss.css">
+
+  <script src="src/someJS.js"></script>
+  <script src="src/showDB_Obscured_encoded.json" type="application/json"></script>
+  <title>DJ INFO</title>
+  <style>
+    @media (max-width: 768px) {
+
+      .showTitleBox {
+        font-size: 0.7em;
+        margin: auto;
+      }
+
+      .innerTitleElem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        
+      }
+
+      .showTitleImg {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: var(--Light-Gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid var(--Gold);
+        /* align vertically and horizantally center */
+        margin: auto;
+      }
+
+      .showTitleImg img {
+        width: 10%;
+        height: auto;
+      }
+
+      #hostNamesList{
+        font-size: 1.4em;
+      }
+      .socials a{
+        font-size: 1em !important;
+      }
+      .hostNames {
+        font-size: 1em;
+      }
+      .iframeContainer {
+        width: 60% !important;
+        height: 100%;
+        flex: 0 0 100% !important;
+
+      }
+      .spotifyIframe{
+        width: 80% !important;
+      }
+    }
+    .spotifyIframe{
+        width: 100%;
+      }
+
+
+    .iframeContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+    .showTitleBox {
+      background-color: var(--Black);
+      color: var(--Gold);
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+      border-radius: 8px;
+    }
+
+    .showTitleBox div {
+      display: inline-block;
+      position: relative;
+
+    }
+
+    .showTitleImg {
+      width: 80px;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: var(--Light-Gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--Gold);
+    }
+
+    .showTitleImg img {
+      width: 100%;
+      height: auto;
+    }
+    .showTime-Hosts h3, .showTime-Hosts svg {
+      font-size: 24px;
+    }
+    .showTime-Hosts a {
+      font-size: 20px;
+    }
+    .showTime-Hosts {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      /* padding-left: 1%;
+      padding-right: 4px; */
+      /* text-align: center; */
+
+      position: relative;
+      padding-bottom: 4%;
+      border-bottom: 1px solid var(--Black);
+    }
+
+    .showTime-Hosts div {
+      display: inline-block;
+      position: relative;
+      /* border: 1px solid var(--Black); */
+    }
+
+    .hostNames {
+      text-align: right;
+    }
+
+    .host-names ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .host-names li {
+      text-align: right;
+      padding-right: 10px;
+      font-size: 24px;
+    }
+
+    .socials ul{
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .socials a {
+      text-align: left;
+      
+      padding-bottom: 4px;
+      text-decoration: none;
+      color: var(--AOK-Teal);
+    }
+    .socials li {
+      padding-bottom: 10px;
+    }
+    .socials svg {
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+      margin-right: 0.1em;
+      
+    }
+
+    #showBlurb {
+      text-align: center;
+      padding: 20px;
+      line-height: 1.4;
+      font-size: 24px;
+      border-bottom: 1px solid var(--Black);
+    }
+
+    #showSelecter {
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid var(--Gold);
+      background-color: var(--Black);
+      color: var(--Gold);
+      font-size: 1em;
+    }
+  </style>
+
+  <script>
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="logo-circle">
+      <img
+        src="imgs/wmbc/logo-text-225x255.png"
+        alt="University Radio Station Logo">
+    </div>
+    <h1>DJ Info Page</h1>
+
+  </header>
+  <nav class="tabs">
+    <ul>
+      <li><a href="radio_listener.html">Listen!</a></li>
+      <li><a href="schedulePage.html">Schedule</a></li>
+      <li><a href="baseDJPage.html">Explore our shows!</a></li>
+    </ul>
+  </nav>
+  <div style="text-align: center; margin: 20px 0;">
+
+  </div>
+  <div class="container" style="margin-bottom:20px">
+    <div class="showTitleBox">
+      <div class="innerTitleElem" style="margin-right:0px; padding-right:0px;">
+        <h1 id="showName" style="margin-right:0px; padding-right:0px;">Example Show Name</h1>
+      </div>
+<!--       
+      <div class="showTitleImg innerTitleElem" style="margin-left:0px; padding-left:0px;">
+        <img id="showImgSlot" style="margin-left:0px;  padding-left:0px;" src="" alt="Radio Show Logo">
+      </div>
+    </div>
+    <h2 id="timeSlot" style="padding-bottom:4px; margin-bottom: 0px; text-align: center;"></h2>
+    <div class="showTime-Hosts">
+      <div style="text-align: left">
+
+        <h3 style="padding-top:4px; padding-bottom: 4px; margin: 0px"> Socials:</h3>
+        <div class="socials">
+          <ul id="socialsList" style="padding-top:0px; margin-top: 0px">
+            <li id="instagram">Insta</li>
+            <li id="twitter">Twitter</li>
+            <li id="'other1">Other</li>
+        </div>
+      </div> -->
+      <div class="host-names" style="text-align: center">
+        <h3 class="hostNames" style="padding-bottom: 0px; margin-bottom: 4px; margin-top:0px;">Your Host(s)</h3>
+        <ul id="hostNamesList">
+          <!-- <li>Host Name</li>
+          <li>This is Long Host Name</li>
+          <li>Host Name</li> -->
+      </div>
+    </div>
+
+  
+
+
+  </div>
+
+
+  
+  <footer class="footer">
+    <p style>WMBC's Web Player, made by will :3</p>
+  </footer>
+</body>
+
+</html>
