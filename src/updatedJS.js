@@ -407,9 +407,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function fetchAndDisplayTracks() {
-
-
-  
   const url = "https://public.radio.co/stations/s7a5fb9da6/history";
   fetch(url)
     .then((response) => response.json())
@@ -484,21 +481,6 @@ document.addEventListener("DOMContentLoaded", () => {
   checkNowPlayingUpdate();
   document.getElementById("addClock").addEventListener("click", addClock);
   var firstRecord = document.getElementById('firstRecord');
-
-  // firstRecord.addEventListener('mouseenter', () => {
-  //   console.log("hovered");
-  //   var currentTranslate = getComputedStyle(firstRecord).transform;
-  //   var translateYValue = currentTranslate === 'none' ? 0 : parseFloat(currentTranslate.split(',')[5]);
-
-  // });
-
-  // firstRecord.addEventListener('mouseleave', () => {
-  //   console.log("hovered");
-  //   var currentTranslate = getComputedStyle(firstRecord).transform;
-  //   var translateYValue = currentTranslate === 'none' ? 0 : parseFloat(currentTranslate.split(',')[5]);
-  //   console.log(translateYValue);
-
-  // });
 
 
 });
