@@ -15,16 +15,13 @@ const socialIcons = {
 
 
 function decodeName(encodedName, key) {
-  // Decode the Base64 string
+  // decode the Base64 string
   const encodedBytes = Uint8Array.from(atob(encodedName), c => c.charCodeAt(0));
-
-  // Convert key to byte array
+  // convert key to byte array
   const keyBytes = new TextEncoder().encode(key);
-
   // XOR each byte of the encoded name with the corresponding byte of the key
   const decodedBytes = encodedBytes.map((byte, i) => byte ^ keyBytes[i % keyBytes.length]);
-
-  // Convert the byte array back to a string
+  // convert the byte array back to a string
   return new TextDecoder().decode(decodedBytes);
 }
 
@@ -32,124 +29,111 @@ function decodeName(encodedName, key) {
 function getDaySchedule() {
   console.log("attempting schedule!");
   const DECODE_KEY = "IHEARTWILLTOLEDO!!!!";
-    var now = new Date();
-    var day = now.getDay();
-    var hour = now.getHours();
-    var minute = now.getMinutes();
 
-    //example demodate for 12:30 on a monday
-    //new Date("2025-02-21T12:30:00");
-    //DATE NEW DATE EXMAPLE DATE
-    var time = hour + ":" + minute;
-    var dayString = "";
-    switch (day) {
-      case 0:
-        dayString = "Sunday";
-        break;
-      case 1:
-        dayString = "Monday";
-        break;
-      case 2:
-        dayString = "Tuesday";
-        break;
-      case 3:
-        dayString = "Wednesday";
-        break;
-      case 4:
-        dayString = "Thursday";
-        break;
-      case 5:
-        dayString = "Friday";
-        break;
-      case 6:
-        dayString = "Saturday";
-        break;
+  var now = new Date();
+  var day = now.getDay();  // get current day as number (0-6)
+  var hour = now.getHours();  // current hour (0-23)
+  var minute = now.getMinutes();  // current minute
+  var time = hour + ":" + minute;
+
+// convert numeric day to string
+var dayString = "";
+switch (day) {
+  case 0:
+    dayString = "Sunday";
+    break;
+  case 1:
+    dayString = "Monday";
+    break;
+  case 2:
+    dayString = "Tuesday";
+    break;
+  case 3:
+    dayString = "Wednesday";
+    break;
+  case 4:
+    dayString = "Thursday";
+    break;
+  case 5:
+    dayString = "Friday";
+    break;
+  case 6:
+    dayString = "Saturday";
+    break;
+}
+  // filter shows that air today
+  var showsToday = [];
+  for (var i = 0; i < DJ_JSON.length; i++) {
+    if (DJ_JSON[i].broadcastTime.dayOfWeek === dayString) {
+      showsToday.push(DJ_JSON[i]);
     }
-    //iterate through the json and load all shows with broadcastTime.dayOfWeek == dayString
-    var showsToday = [];
-    for (var i = 0; i < DJ_JSON.length; i++) {
-      if (DJ_JSON[i].broadcastTime.dayOfWeek == dayString) {
-        showsToday.push(DJ_JSON[i]);
-      }
+  }
+  // sort shows by start time
+  showsToday.sort(function (a, b) {
+    var aParts = a.broadcastTime.startTime.split(":");
+    var bParts = b.broadcastTime.startTime.split(":");
+
+    var aHour = parseInt(aParts[0]);
+    var aMinute = parseInt(aParts[1]);
+    var bHour = parseInt(bParts[0]);
+    var bMinute = parseInt(bParts[1]);
+
+    if (aHour === bHour) {
+      return aMinute - bMinute;
     }
-
-    //sort shows in showsToday by start time
-    showsToday.sort(function (a, b) {
-      var aTime = a.broadcastTime.startTime.split(":");
-      var bTime = b.broadcastTime.startTime.split(":");
-      var aHour = parseInt(aTime[0]);
-      var bHour = parseInt(bTime[0]);
-      var aMinute = parseInt(aTime[1]);
-      var bMinute = parseInt(bTime[1]);
-
-      if (aHour === bHour) {
-        return aMinute - bMinute;
-      } else {
-        return aHour - bHour;
-      }
+    return aHour - bHour;
   });
 
-  // convert to a string in the formt of
-  // [Time in 12 hour format] - [show name] ([host name])
+  // build formatted string
   var scheduleString = "";
   for (var i = 0; i < showsToday.length; i++) {
     var show = showsToday[i];
     var startTime = show.broadcastTime.startTime;
+    var showName = show.showName.replace("%26", "&");
     var hostNames = show.hostNames;
-    var showName = show.showName;
-    //if showname contains %26 replace with &
-    showName = showName.replace("%26", "&");
     var hosts = "";
+
     for (var j = 0; j < hostNames.length; j++) {
-      let decodedName = decodeName(hostNames[j], DECODE_KEY);
-      if (decodedName.endsWith(".")) {
-      decodedName = decodedName.slice(0, -3); // Remove last initial and period
+      var decoded = decodeName(hostNames[j], DECODE_KEY);
+      if (decoded.endsWith(".")) {
+        decoded = decoded.slice(0, -3); // Remove last initial and period
       }
-      hosts += decodedName;
-      
+      hosts += decoded;
       if (j < hostNames.length - 1) {
-      hosts += ", ";
+        hosts += ", ";
       }
     }
-    //convert to 12 hour time
+    // convert 24h to 12h
     var timeParts = startTime.split(":");
     var hour = parseInt(timeParts[0]);
     var minute = timeParts[1];
-    var ampm = "AM";
-    if (hour > 12) {
-      hour -= 12;
-      ampm = "PM";
-    }
-    startTime = hour + ":" + minute;
+    var ampm = hour >= 12 ? "PM" : "AM";
+    hour = hour % 12 || 12;
+    var displayTime = hour + ":" + minute;
 
-    scheduleString += startTime + " " + showName + " (" + hosts + ")";
+    scheduleString += displayTime + " " + showName + " (" + hosts + ")";
     if (i < showsToday.length - 1) {
       scheduleString += "\n";
     }
   }
+  console.log(scheduleString);
 
-  console.log(scheduleString);  
-
-  // merge all hostNames into one string, decode too
-
-
-  //
+  // copy schedule string to clipboard
   if (!navigator.clipboard) {
     fallbackCopyTextToClipboard(scheduleString);
     return;
   }
-  navigator.clipboard.writeText(scheduleString).then(function() {
-    console.log('Async: Copying to clipboard was successful!');
-  }, function(err) {
-    console.error('Async: Could not copy text: ', err);
-  });
+  navigator.clipboard.writeText(scheduleString)
+    .then(() => console.log('Async: Copy successful!'))
+    .catch(err => console.error('Async: Copy failed:', err));
 }
+
+
 function fallbackCopyTextToClipboard(text){
-  
   var textArea = document.createElement("textarea");
   textArea.value = text;
   
-  // Avoid scrolling to bottom
+  // avoid scrolling to bottom
   textArea.style.top = "0";
   textArea.style.left = "0";
   textArea.style.position = "fixed";
@@ -165,65 +149,66 @@ function fallbackCopyTextToClipboard(text){
   } catch (err) {
     console.error('Fallback: Oops, unable to copy', err);
   }
-
   document.body.removeChild(textArea);
-
 }
 
 
-//function override css passed by id and translate them up by -40%
+// function to override CSS by element ID and move it upward
 function overrideCSS(id) {
+  // get the element by its ID
   var element = document.getElementById(id);
+  // apply a CSS transform to move it up by 60% of its own height
   element.style.transform = "translateY(-60%)";
-  //remove animation from class so it does not move back down
-  //by overriding the css
-
+  // cancel any animations applied via CSS classes (like a bounce or slide)
   element.style.animation = "none";
 }
 
 
-//demo diff dj loads
+// keep track of which demo we're on
 var CurrDJDemo = 0;
+/**
+ * demoDJs
+loads a simulated DJ schedule based on a test time.
+helps you preview how the site will look for:
+- A live DJ
+- no DJ
+- DJs with profile images or long lists
+ * @param {number} whichDJ -1 = cycle through demos, 0–4 = pick specific demo
+ */
 function demoDJs(whichDJ = -1) {
-  //-1 = cycle,
-  //0-4 = specific DJ
-  // getDJ();
-  // getDJ(new Date("2025-03-03T22:00:00"));  //no dj
-  // getDJ(new Date("2025-03-03T21:00:00"));  //dj with pfp
-  // getDJ(new Date("2025-03-03T12:30:00"));  //dj with no pfp
-  // getDJ(new Date("2025-03-07T15:30:00"));  //fast minute (long dj list)
-  // getDJ(new Date("2025-03-27T21:00:00"));  //jenny (ampersand title!)
+  // if no specific demo is given, cycle to the next one
   if (whichDJ === -1) {
     CurrDJDemo++;
     if (CurrDJDemo > 4) {
-      CurrDJDemo = 0;
+      CurrDJDemo = 0; // wrap back to 0 after the last demo
     }
     whichDJ = CurrDJDemo;
   }
-
+  // pick the demo scenario based on whichDJ value
   switch (whichDJ) {
     case 0:
-      getDJ();
+      getDJ(); // current live DJ based on real time
       console.log("Selecting live DJ");
       break;
     case 1:
-      getDJ(new Date("2025-03-03T22:00:00"));
+      getDJ(new Date("2025-03-03T22:00:00")); // no DJ present
       console.log("no dj");
       break;
     case 2:
-      getDJ(new Date("2025-03-03T21:00:00"));
+      getDJ(new Date("2025-03-03T21:00:00")); // dj with profile picture
       console.log("dj with pfp");
       break;
     case 3:
-      getDJ(new Date("2025-03-03T12:30:00"));
+      getDJ(new Date("2025-03-03T12:30:00")); // dj with no profile picture
       console.log("dj with no pfp");
       break;
     case 4:
-      getDJ(new Date("2025-03-07T15:30:00"));
+      getDJ(new Date("2025-03-07T15:30:00")); // fast turn-around show (many DJs or a long list)
       console.log("fast minute (long dj list)");
       break;
   }
 }
+
 
 function animateDJCycle() {
   //cycle them on loop
@@ -236,177 +221,143 @@ function animateDJCycle() {
     }
   }, 5000);
   
-  // Cleanup interval to prevent memory leaks
+  // cleanup interval to prevent memory leaks
   window.addEventListener("beforeunload", () => {
     clearInterval(demoInterval);
   });
 }
 
-  document.addEventListener("DOMContentLoaded", function () {
-      if (window.innerWidth < 600) {
-        let player = document.querySelector(".radioplayer");
-        let playButton = document.querySelector(".radioco-playButton");
-        let image = document.querySelector(".radioco-image");
-
-        if (player && playButton && image) {
-            // Create a wrapper div for the image and play button
-            let headerDiv = document.createElement("div");
-            headerDiv.classList.add("radioco-header");
-
-            // Append the image and play button to the new div
-            headerDiv.appendChild(image);
-            headerDiv.appendChild(playButton);
-            let spacer = document.createElement("div");
-            //make an invible spacer that is the exact same size as the image
-            spacer.style.width = "60px";
-            spacer.style.height = "60px";
-            //no padding or margin
-            spacer.style.margin = "0px -10px 0px 0px";
-            spacer.style.padding = "0px";
-            headerDiv.appendChild(spacer);
-            // Insert the header div at the top of the radio player
-            player.prepend(headerDiv);
-        }
-      }
-      
-  });
+// function to add a clock to the header
+document.addEventListener("DOMContentLoaded", () => {
+  handleMobileLayout();
+  handleSpecialURLParams();
+  setupPlayButtonAnimation();
+});
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM loaded");
+// 1) rearrange radio layout for mobile!!!
+function handleMobileLayout() {
+  if (window.innerWidth < 600) {
+    const player = document.querySelector(".radioplayer");
+    const playButton = document.querySelector(".radioco-playButton");
+    const image = document.querySelector(".radioco-image");
 
-  if (window.innerWidth < 768) {
-    if(false){
-      const radioImage = document.querySelector(".radioco-image");
+    if (player && playButton && image) {
+      const headerDiv = document.createElement("div");
+      headerDiv.classList.add("radioco-header");
 
-      if (playButton && radioImage) {
-        // Create a new div to hold the play button and image
-        const playImageContainer = document.createElement("div");
-        playImageContainer.className = "play-image-container";
+      // Append image, play button, and an invisible spacer
+      headerDiv.appendChild(image);
+      headerDiv.appendChild(playButton);
 
-        // Move the image and play button into the new container
-        playImageContainer.appendChild(radioImage);
-        playImageContainer.appendChild(playButton);
+      const spacer = document.createElement("div");
+      spacer.style.cssText = `
+        width: 60px;
+        height: 60px;
+        margin: 0 -10px 0 0;
+        padding: 0;
+      `;
+      headerDiv.appendChild(spacer);
 
-        // Append the new container to the radioplayer div
-        radioPlayerDiv.appendChild(playImageContainer);
-      }
-      //now move the radioco-information div to the end of the radioplayer div
-      const infoDiv = document.querySelector(".radioco-information");
-      if (infoDiv) {
-        radioPlayerDiv.appendChild(infoDiv);
-      }
-      
+      player.prepend(headerDiv);
     }
   }
-  //from socialIcons
-  // document.getElementById("instagram").innerHTML = socialIcons.instagram;
-  // document.getElementById("facebook").innerHTML = socialIcons.facebook;
-  // document.getElementById("linktree").innerHTML = socialIcons.linktree;
-  const selectedShowName = event.target.value;
-  //get url and split after "baseDJPage.html"
+}
+// 2) handle special ?=clock and ?=yass URL parameters
+function handleSpecialURLParams() {
   const url = window.location.href;
-  var urlParts = "";
-  // url.split("radio_listener.html");
+  let urlSuffix = "";
+
   if (url.includes("radio_listener.html")) {
-    urlParts = url.split("radio_listener.html");
-  } else {
-    urlParts = url.split("baseDJPage.html");
-  }
-  console.log(urlParts);
-  //if it is ?=clock, use the time class and append header 
-  //with a clock that updates every minute
-  if (urlParts[1] === "?=clock") {
-    //replace the header with a clock
-    document.querySelector("header").innerHTML += "<h1 id='clock' style='font-size:30px'></h1>";
-    //update the clock every minute
-    var now = new Date();
-    document.getElementById("clock").textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    setInterval(() => {
-      now.setMinutes(now.getMinutes() + 1);
-      document.getElementById("clock").textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    }, 60000);
-
-    // Check for desync every 30 minutes
-    setInterval(() => {
-      now = new Date();
-      document.getElementById("clock").textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    }, 1800000);
-    return;
+    urlSuffix = url.split("radio_listener.html")[1];
+  } else if (url.includes("baseDJPage.html")) {
+    urlSuffix = url.split("baseDJPage.html")[1];
   }
 
-  
-  if (urlParts[1] === "?=yass") {
-    //add button and a text area uneditable, 
-    //click button and the number adds 1 to current counter in text area
-    //save to local storage
-    //also load from local storage if exists
-    //if it does not exist, set to 0
+  if (urlSuffix === "?=clock") {
+    initClock();
+  } else if (urlSuffix === "?=yass") {
+    initYassCounter();
+  }
+}
+// pt1 of 2) adds a live updating clock to the header
+function initClock() {
+  const header = document.querySelector("header");
+  const clockElem = document.createElement("h1");
+  clockElem.id = "clock";
+  clockElem.style.fontSize = "30px";
+  header.appendChild(clockElem);
 
-    //button
-    var button = document.createElement("button");
-    button.textContent = "Hit the Yass button!";
-    button.style.fontSize = "20px";
-    button.style.padding = "10px";
-    button.style.margin = "10px";
-    button.style.borderRadius = "10px";
-    button.style.backgroundColor = "var(--Gold)";
+  const updateClock = () => {
+    const now = new Date();
+    clockElem.textContent = now.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+  updateClock();
+  setInterval(updateClock, 60000);  // update every minute
+  setInterval(updateClock, 1800000);  // resync every 30 minutes
+}
+// pt2 of 2) adds a Yass Button that increments a counter stored in localStorage
+function initYassCounter() {
+  const header = document.querySelector("header");
+  const button = document.createElement("button");
+  button.textContent = "Hit the Yass button!";
+  button.style.cssText = `
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: var(--Gold);
+  `;
+  const textArea = document.createElement("textarea");
+  textArea.style.cssText = `
+    width: 20%;
+    height: 100px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: var(--Gold);
+  `;
+  textArea.readOnly = true;
+  header.append(button, textArea);
 
-    //text area
-    var textArea = document.createElement("textarea");
-    textArea.style.width = "20%";
-    textArea.style.height = "100px";
-    textArea.style.fontSize = "20px";
-    textArea.style.padding = "10px";
-    textArea.style.margin = "10px";
-    textArea.style.borderRadius = "10px";
-    textArea.style.backgroundColor = "var(--Gold)";
-    textArea.readOnly = true;
+  let yassCount = localStorage.getItem("yassCount");
+  if (yassCount === null) yassCount = 0;
+  textArea.textContent = yassCount;
 
-    //add button and text area to the body
-    document.querySelector("header").appendChild(button);
-    document.querySelector("header").appendChild(textArea);
-
-    //load from local storage
-    var yassCount = localStorage.getItem("yassCount");
-    if (yassCount === null) {
-      yassCount = 0;
-    }
+  button.addEventListener("click", () => {
+    yassCount++;
     textArea.textContent = yassCount;
-    //add event listener to button
-    button.addEventListener("click", function () {
-      yassCount++;
-      textArea.textContent = yassCount;
-      localStorage.setItem("yassCount", yassCount);
-    });
+    localStorage.setItem("yassCount", yassCount);
+  });
+}
+// 3) animate elements when play button is clicked
+function setupPlayButtonAnimation() {
+  const playButton = document.querySelector(".radioco-playButton");
+  const overElem = document.querySelector(".over");
+
+  if (!playButton || !overElem) 
     return;
 
-
-
-
-  }
-});
-
-
-
-//event listener for div radioco-playButton's child
-//if = radioco-playButton-paused, apply moveItMoveIt, else remove it
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector(".radioco-playButton").addEventListener("click", function () {
+  const toggleAnimation = () => {
     if (document.querySelector(".radioco-playButton-playing")) {
-      document.querySelector(".over").classList.add("moveItMoveIt");
+      overElem.classList.add("moveItMoveIt");
     } else {
-      document.querySelector(".over").classList.remove("moveItMoveIt");
+      overElem.classList.remove("moveItMoveIt");
     }
-    // Cleanup to prevent memory leaks
-    window.addEventListener("beforeunload", () => {
-      playButton.removeEventListener("click", toggleMoveItMoveIt);
-    });
+  };
+  playButton.addEventListener("click", toggleAnimation);
+  window.addEventListener("beforeunload", () => {
+    playButton.removeEventListener("click", toggleAnimation);
   });
-});
+}
 
 
 function fetchAndDisplayTracks() {
+  // fetch the track history from the API  
   const url = "https://public.radio.co/stations/s7a5fb9da6/history";
   fetch(url)
     .then((response) => response.json())
@@ -481,6 +432,21 @@ document.addEventListener("DOMContentLoaded", () => {
   checkNowPlayingUpdate();
   document.getElementById("addClock").addEventListener("click", addClock);
   var firstRecord = document.getElementById('firstRecord');
+
+  // firstRecord.addEventListener('mouseenter', () => {
+  //   console.log("hovered");
+  //   var currentTranslate = getComputedStyle(firstRecord).transform;
+  //   var translateYValue = currentTranslate === 'none' ? 0 : parseFloat(currentTranslate.split(',')[5]);
+
+  // });
+
+  // firstRecord.addEventListener('mouseleave', () => {
+  //   console.log("hovered");
+  //   var currentTranslate = getComputedStyle(firstRecord).transform;
+  //   var translateYValue = currentTranslate === 'none' ? 0 : parseFloat(currentTranslate.split(',')[5]);
+  //   console.log(translateYValue);
+
+  // });
 
 
 });
