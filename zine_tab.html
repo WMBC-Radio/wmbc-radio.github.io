@@ -126,7 +126,7 @@
       </a>
 
       
-      <!-- <a onclick="loadZinePage()">
+      <a onclick="loadZinePage()">
         <g id="fourthRecord">
 
           <circle cx="114%" cy="115%" r="14%" fill="#000000" class="linkRecords outerRec" />
@@ -143,7 +143,7 @@
           </text>
 
         </g>
-      </a> -->
+      </a>
 
 
     </svg>
@@ -468,9 +468,18 @@
 
       </div>
 
+      <div id="zineOuterDiv" class="lowerHalfChild" style="display:none;">
+        <div> 
+            <div class="test">
+                <h2 class="test" style="text-align: center">Presenting: The WMBC Zine</h2>
+                
+            </div>
+        </div>
+      </div>
 
-    </div>
-  </div>
+
+    </div> <!-- end lower half -->
+  </div> <!-- container end -->
   <footer class="footer" style="max-width:100%">
     <p>
       <!-- <input id="startTimerButton" type="button" value="WMBC's Web Player," style="display: none;"> <input id="addClock" type="button" value=" made by will :3"></p> -->
@@ -485,6 +494,18 @@
   // overrideCSS("firstRecord")
   // overrideCSS("secondRecord")
   // overrideCSS("thirdRecord")
+
 </script>
 <script src="src/updatedJS.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // sleep for 0.5 seconds to allow the page to load
+        setTimeout(function() {
+            // Call the function to load the zine page after the delay
+            loadZinePage();
+        },50); // 500 milliseconds = 0.5 seconds
+        // loadZinePage();
+    });
+
+</script>
 </html>

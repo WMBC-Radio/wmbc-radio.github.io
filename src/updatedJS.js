@@ -1951,6 +1951,34 @@ function loadSchedule() {
   //clear all past broadcasts
   document.getElementById("pastBroadcastsDiv").innerHTML = "";
   //clear all custom css
+  document.getElementById("zineOuterDiv").style.display = "none";
+
+}
+
+
+function loadZinePage() {
+  var lowerHalfChildren = document.getElementsByClassName("lowerHalfChild");
+  for (var i = 0; i < lowerHalfChildren.length; i++) {
+    lowerHalfChildren[i].style.display = "none";
+  }
+  removeCustomCss();
+  document.getElementById("theSchedule").style.display = "none";
+  document.getElementById("theShowsInfoPage").style.display = "none";
+  document.getElementById("theShowsInfoPageDropdown").style.display = "none";
+  document.getElementById("lowerHalf").style.flexDirection = "";
+  document.getElementById("showBlurb").innerText = "";
+  document.getElementById("timeSlot").innerText = "";
+  document.getElementById("showName").innerText = "";
+  //clear hostNames
+  document.getElementById("hostNamesList").innerText = "";
+
+  //clear all socials
+  // document.getElementById("socialsList").innerHTML = "";
+  //clear all past broadcasts
+  document.getElementById("pastBroadcastsDiv").innerHTML = "";
+  //clear all custom css
+  document.getElementById("zineOuterDiv").style.display = "block";
+
 
 
 }
@@ -1978,6 +2006,7 @@ function loadMainPlayer() {
   //clear all past broadcasts
   document.getElementById("pastBroadcastsDiv").innerHTML = "";
   //clear all custom css
+  document.getElementById("zineOuterDiv").style.display = "none";
 
 }
 
@@ -1996,6 +2025,7 @@ function loadShowinfoPage() {
   document.getElementById("lowerHalf").style.flexDirection = "column";
 
   generatePage();
+  document.getElementById("zineOuterDiv").style.display = "none";
   
 }
 
