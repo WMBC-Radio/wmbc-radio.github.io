@@ -622,7 +622,6 @@ fetch('./src/showDB_Obscured_encoded.json')
     DJ_JSON = json;
 
     fullInitSync();
-    loadSpecialtyShows();
     getDJ();
   })
   .catch((error) => {
