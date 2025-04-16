@@ -310,8 +310,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const url = window.location.href;
   var urlParts = "";
   // url.split("radio_listener.html");
-  if (url.includes("radio_listener.html")) {
-    urlParts = url.split("radio_listener.html");
+  if (url.includes("index.html")) {
+    urlParts = url.split("index.html");
   } else {
     urlParts = url.split("baseDJPage.html");
   }
@@ -2196,8 +2196,8 @@ function loadShowinfoPage() {
 function addClock() {
   if (window.location.href.includes("?=clock")) {
     //will apply to radio_listener.html if on that page, or aquarium_layout.html too
-    if (window.location.href.includes("radio_listener.html")) {
-      window.location.href = "radio_listener.html";
+    if (window.location.href.includes("index.html")) {
+      window.location.href = "index.html";
       document.getElementById("clock").remove();
     }
     if( window.location.href.includes("aquarium_layout.html")) {
@@ -2207,8 +2207,8 @@ function addClock() {
     
   }
   else{
-    if(window.location.href.includes("radio_listener.html")) {
-      window.location.href = "radio_listener.html?=clock";
+    if(window.location.href.includes("index.html")) {
+      window.location.href = "index.html?=clock";
     }
     if(window.location.href.includes("aquarium_layout.html")) {
       window.location.href = "aquarium_layout.html?=clock";

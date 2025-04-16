@@ -3,624 +3,39 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WMBC Radio - Home</title>
-  <style>
-    :root {
-      --Black: #000000;
-      --Gold: #fdb515;
-      --Red: #da2128;
-      --Light-Gray: #c7c8ca;
-      --AOK-Teal: #007176;
-      --Retriever-Brown: #a67a05;
-      --Dark-Gray: #636466
-    }
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="src/somecss.css">
+  <link rel="stylesheet" href="src/updatedCSS.css">
 
-    .tabs {
-      background-color: var(--AOK-Teal);
-      padding: 10px 0;
-      text-align: center
-    }
+  <title>Temp Unofficial WMBC</title>
+  <link rel="icon" type="image/x-icon" href="/imgs/wmbc/logo-text-225x255.png">
+  <script> const STATION_ID = "s7a5fb9da6";
 
-    .tabs ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      gap: 20px
-    }
 
-    .tabs li {
-      display: inline
-    }
 
-    .tabs a {
-      color: var(--Gold);
-      text-decoration: none;
-      font-weight: 700;
-      padding: 10px 15px;
-      border-radius: 4px;
-      transition: background-color .3s ease
-    }
-
-    .tabs a:hover {
-      background-color: var(--Retriever-Brown);
-      color: #fff
-    }
-
-    .tabs a:active {
-      background-color: var(--Gold);
-      color: var(--Black)
-    }
-
-    @media (max-width:768px) {
-      header {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px
-      }
-
-      .container {
-        margin: 10px;
-        padding: 15px
-      }
-
-      .logo-circle {
-        width: 60px;
-        height: 60px
-      }
-
-      header h1 {
-        font-size: 20px
+    //on load
+    window.onload = function () {
+      if (window.innerWidth < 768) {
+        // change the svg viewbox to be 0 200 1000 200
+        document.getElementById("glorpus").setAttribute("viewBox", "0 0 1000 200");
       }
     }
-
-    .container {
-      max-width: 800px;
-      background-color: #fff;
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .1)
-    }
-
-    body {
-      background-color: var(--Light-Gray);
-      color: var(--Black)
-    }
-
-    header {
-      background-color: var(--AOK-Teal);
-      color: var(--Gold)
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0
-    }
-
-    header {
-      background-color: var(--Black);
-      color: var(--Gold);
-      padding: 20px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px
-    }
-
-    .logo-circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: var(--Light-Gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid var(--Gold)
-    }
-
-    .logo-circle img {
-      width: 100%;
-      height: auto
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-      color: var(--Gold)
-    }
-
-    body {
-      background-color: var(--Light-Gray);
-      color: var(--Black)
-    }
-
-    header {
-      background-color: var(--AOK-Teal);
-      color: var(--Gold)
-    }
-
-    .track-list {
-      background-color: var(--Dark-Gray);
-      color: #fff;
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px
-    }
-
-    #lowerHalf {
-      width: 100%;
-      display: flex
-    }
-
-    .lowerHalfChild {
-      display: inline-block;
-      width: 100%;
-      margin-left: 1%;
-      display: flex;
-      flex-direction: column
-    }
-
-    .Show-Info-up-next {
-      background-color: var(--Dark-Gray);
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      height: auto
-    }
-
-    .Show-Info-about-WMBC {
-      background-color: var(--Dark-Gray);
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      height: 100%
-    }
-
-    .djInfo {
-      color: #fff;
-      padding-right: 8px;
-      padding-top: 0;
-      padding-bottom: 0;
-      border-radius: 8px
-    }
-
-    .track-list h2 {
-      color: var(--Gold)
-    }
-
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 5em
-    }
-
-    .socials a {
-      font-size: 1em !important;
-      color: var(--Gold)
-    }
-
-    .socials svg {
-      width: 2em;
-      height: 2em;
-      vertical-align: middle;
-      margin-right: .1em
-    }
-
-    .socials img {
-      width: 2em;
-      height: 2em;
-      vertical-align: middle;
-      margin-right: .1em
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0
-    }
-
-    header {
-      background-color: var(--Black);
-      color: var(--Gold);
-      padding: 20px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px
-    }
-
-    .logo-circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: var(--Light-Gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid var(--Gold)
-    }
-
-    .logo-circle img {
-      width: 100%;
-      height: auto
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-      color: var(--Gold)
-    }
-
-    .container {
-      max-width: 800px;
-      background-color: #fff;
-      margin: 20px auto;
-      margin-top: 5px;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .1)
-    }
-
-    .player {
-      margin-bottom: 20px
-    }
-
-    .track-list h2 {
-      margin-top: 0
-    }
-
-    .track-list ul {
-      list-style-type: none;
-      padding: 0
-    }
-
-    .track-list img {
-      box-shadow: #000 2px 4px 2px 0
-    }
-
-    .track-list li {
-      padding: 8px 0
-    }
-
-    .track-list li:last-child {
-      border-bottom: none
-    }
-
-    .current-DJ {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background-color: var(--Dark-Gray);
-      padding: 10px;
-      margin: 0 0;
-      padding-bottom: 20px;
-      border-radius: 8px;
-      color: #fff
-    }
-
-    .Show-Info-about-WMBC {
-      background-color: var(--Dark-Gray);
-      padding: 15px;
-      border-radius: 8px;
-      height: 100%
-    }
-
-    #getInvolvedTitle {
-      color: var(--Gold);
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      text-align: center
-    }
-
-    #getInvolvedText {
-      color: #fff;
-      font-size: 20px;
-      text-align: center
-    }
-
-    .current-DJ a,
-    .current-DJ p {
-      padding: 0 20px
-    }
-
-    .socials {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px
-    }
-
-    .socials img {
-      width: 30px;
-      height: 30px
-    }
-
-    .current-DJ span {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--Gold)
-    }
-
-    .recordImgContainer {
-      background-color: #fff;
-      position: relative;
-      max-width: 100%;
-      height: 150px;
-      overflow: hidden;
-      z-index: 10
-    }
-
-    .recordImgContainer img {
-      padding-left: 34%
-    }
-
-    @media (max-width:1008px) {
-      .recordImgContainer img {
-        width: 25% !important;
-        height: 100% !important;
-        padding-left: 5%
-      }
-    }
-
-    @media (max-width:700px) {
-      .recordImgContainer img {
-        width: 30% !important;
-        height: 80% !important;
-        padding-left: 0
-      }
-    }
-
-    @keyframes over {
-      0% {
-        transform: translateX(-5px)
-      }
-
-      50% {
-        transform: translateX(0)
-      }
-
-      100% {
-        transform: translateX(-5px)
-      }
-    }
-
-    #firstRecord:hover {
-      animation-delay: 0s, .2s;
-      animation-name: lift, spinCircleSVGs;
-      animation-duration: .2s, 5s;
-      animation-timing-function: ease-in, linear;
-      animation-iteration-count: 1, infinite;
-      animation-fill-mode: forwards;
-      transform-origin: 45% 115%
-    }
-
-    #firstRecord {
-      animation: unlift .2s ease-out forwards
-    }
-
-    #secondRecord:hover {
-      animation-delay: 0s, .2s;
-      animation-name: lift, spinCircleSVGs;
-      animation-duration: .2s, 5s;
-      animation-timing-function: ease-in, linear;
-      animation-iteration-count: 1, infinite;
-      animation-fill-mode: forwards;
-      transform-origin: 68% 115%
-    }
-
-    #secondRecord {
-      animation: unlift .2s ease-out forwards
-    }
-
-    #thirdRecord:hover {
-      animation-delay: 0s, .2s;
-      animation-name: lift, spinCircleSVGs;
-      animation-duration: .2s, 5s;
-      animation-timing-function: ease-in, linear;
-      animation-iteration-count: 1, infinite;
-      animation-fill-mode: forwards;
-      transform-origin: 91% 115%
-    }
-
-    #thirdRecord {
-      animation: unlift .2s ease-out forwards
-    }
-
-    @keyframes lift {
-      0% {
-        transform: translateY(0)
-      }
-
-      100% {
-        transform: translateY(-30%)
-      }
-    }
-
-    @keyframes unlift {
-      0% {
-        transform: translateY(-30%)
-      }
-
-      100% {
-        transform: translateY(0)
-      }
-    }
-
-    @keyframes liftRec1 {
-      0% {
-        transform: translateY(var(--current-translate, 0))
-      }
-
-      100% {
-        transform: translateY(-30%)
-      }
-    }
-
-    @keyframes unliftRec1 {
-      0% {
-        transform: translateY(var(--current-translate, -30%))
-      }
-
-      100% {
-        transform: translateY(0)
-      }
-    }
-
-    @keyframes spinCircleSVGs {
-      0% {
-        transform: translateY(-30%) rotateZ(0)
-      }
-
-      100% {
-        transform: translateY(-30%) rotateZ(360deg)
-      }
-    }
-
-    .showTitleImg {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: var(--Light-Gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid var(--Gold);
-      margin: auto;
-      padding: 0
-    }
-
-    .showTitleImg img {
-      width: 100%;
-      height: auto
-    }
-
-    #titleShowInfoBox {
-      color: var(--Gold);
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      text-align: center
-    }
-
-    #descShowInfoBox {
-      color: #fff;
-      font-size: 20px;
-      text-align: center
-    }
-
-    @keyframes festive {
-      0% {
-        background-color: var(--AOK-Teal)
-      }
-
-      100% {
-        background-color: var(--Gold)
-      }
-    }
-
-    @keyframes weAreLive {
-      0% {
-        color: #fff
-      }
-
-      30% {
-        color: #fff
-      }
-
-      70% {
-        color: var(--Red)
-      }
-
-      100% {
-        color: var(--Red)
-      }
-    }
-
-    @media (max-width:768px) {
-      .showTitleImg {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: var(--Light-Gray);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 3px solid var(--Gold)
-      }
-
-      .showTitleImg img {
-        width: 10%;
-        height: auto
-      }
-
-      .socials a {
-        font-size: 1em !important
-      }
-    }
-
-    .showTitleImg {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: var(--Light-Gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid var(--Gold)
-    }
-
-    .showTitleImg img {
-      width: 100%;
-      height: auto
-    }
-
-    .socials ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0
-    }
-
-    .socials a {
-      text-align: left;
-      padding-bottom: 4px;
-      text-decoration: none;
-      color: var(--AOK-Teal)
-    }
-
-    .socials li {
-      padding-bottom: 10px
-    }
-
-    .socials svg {
-      width: 1em;
-      height: 1em;
-      vertical-align: middle;
-      margin-right: .1em
-    }
-  </style>
+  </script>
 </head>
 
 <body>
 
+
   <header>
-    <a style="padding: 0px; margin: 0px;">
-      <div class="logo-circle">
-        <img src="logo-text-225x255.png" alt="University Radio Station Logo">
-      </div>
-    </a>
+    <a onclick=getDaySchedule() style="padding: 0px; margin: 0px;">
+    <div class="logo-circle">
+      <img
+        src="imgs/wmbc/logo-text-225x255.png"
+        alt="University Radio Station Logo">
+    </div>
+  </a>
     <h1>WMBC: Web Player</h1>
   </header>
   <!-- M = moveto (move from one point to another point)
@@ -635,15 +50,28 @@ A = elliptical Arc (create a elliptical arc)
 Z = closepath (close the path) -->
 
 
-  <div class="recordImgContainer" style="height:100px; position: relative; width: 100%; z-index: 10; display:none ">
-    <svg id="glorpus" height="100%" width="100%" viewBox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg">
+  <div class="recordImgContainer" style="height:100px; position: relative; width: 100%; z-index: 10; ">
+    <!-- record 1. looks like a vinyl record -->
+    <!-- <div class="headerImgContainer" style=" width:40%; height:100%;  z-index: 20; position: absolute; bottom: 0; left: 0;"> -->
+    <img alt="prachi\'s art, silly kitty body" src="./imgs/prachi goat/tp-headless.png" class="under"></img>
+    <img alt="prachi\'s art, silly kitty head" src="./imgs/prachi goat/tp-head.png" class="over"></img>
+    <!-- </div> -->
+    <svg id="glorpus" height="100%" width="100%" viewBox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg"><!-- <path d="M20 20 L20 100 L40 100 L40 20 Z     M60 20 L60 100 L80 100 L80 20 Z"
+      style="fill:black;" />
+    </svg>
+    <svg height="210" width="400" xmlns="http://www.w3.org/2000/svg">-->
       <a onclick="loadMainPlayer()">
         <g id="firstRecord">
           <circle cx="45%" cy="115%" r="14%" fill="#000000" class="linkRecords outerRec" />
           <circle cx="45%" cy="115%" r="5%" fill="#ffffff" class="linkRecords innerRec" stroke="#ff0000"
             stroke-width="10" />
+          <!-- text on circle -->
+          <!-- <text x="45%" y="85%" fill="white" font-size="15" text-anchor="middle" class="linkRecords">Listen!</text> -->
+
           <path id="firstRecordPath" d="M450,170 A 60 ,60 0 1 1 449.9999 170 M450,170 A 60 ,60 0 1 1 449.9999 170   "
             fill="none" stroke-width="1" stroke="" />
+
+
           <text font-size="25" fill="#FFFFFF" letter-spacing="2">
             <textPath xlink:href="#firstRecordPath" method="align" side="right" startOffset="44.5%">
               Listen!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listen!
@@ -651,13 +79,19 @@ Z = closepath (close the path) -->
           </text>
         </g>
       </a>
+
       <a onclick="loadSchedule()">
         <g id="secondRecord">
 
           <circle cx="68%" cy="115%" r="14%" fill="#000000" class="linkRecords" />
           <circle cx="68%" cy="115%" r="5%" fill="#ffffff" class="linkRecords" stroke="#0000FF" stroke-width="10" />
+          <!-- text on circle -->
+          <!-- <text x="68%" y="85%" fill="white" font-size="15" text-anchor="middle" class="linkRecords">Schedule!</text> -->
+
           <path id="secondRecordPath" d="M680,170 A 60 ,60 0 1 1 679.9999 170 M680,170 A 60 ,60 0 1 1 679.9999 170   "
             fill="none" stroke-width="1" stroke="" />
+
+
           <text font-size="25" fill="#FFFFFF" letter-spacing="2">
             <textPath xlink:href="#secondRecordPath" method="align" side="right" startOffset="42.2%">
               Schedule&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedule</textPath>
@@ -671,6 +105,11 @@ Z = closepath (close the path) -->
           <circle cx="91%" cy="115%" r="14%" fill="#000000" class="linkRecords outerRec" />
           <circle cx="91%" cy="115%" r="5%" fill="#ffffff" class="linkRecords innerRec" stroke="#00FF00"
             stroke-width="10" />
+          <!-- text on circle -->
+
+          <!-- this is a path thats simply just a circle -->
+          <!-- move to 10,10  Arc rx = 10 ry =10 , 0 rotation, flag more than 180 deg = 1, move to point 11, 10  -->
+          <!-- A rx ry x-axis-rotation large-arc-flag sweep-flag x y -->
           <path id="thirdRecordPath" d="M910,165 A 65 ,65 0 1 1 909.9999 165 M910,165 A 65 ,65 0 1 1 909.9999 165   "
             fill="none" stroke-width="1" stroke="" />
 
@@ -679,8 +118,32 @@ Z = closepath (close the path) -->
               Shows!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shows!
             </textPath>
           </text>
+
+          <!-- <text x="91%" y="85%" fill="white" font-size="15" text-anchor="middle" class="linkRecords">Explore The Shows!</text> -->
         </g>
       </a>
+
+<!--       
+      <a onclick="loadZinePage()">
+        <g id="fourthRecord">
+
+          <circle cx="114%" cy="115%" r="14%" fill="#000000" class="linkRecords outerRec" />
+          <circle cx="114%" cy="115%" r="5%" fill="#ffffff" class="linkRecords innerRec" stroke="#800080"
+            stroke-width="10" />
+
+          <path id="fourthRecordPath" d="M1150,165 A 65 ,65 0 1 1 1149.9999 165 M1150,165 A 65 ,65 0 1 1 1149.9999 165   "
+            fill="none" stroke-width="1" stroke="" />
+
+          <text font-size="30" fill="#FFFFFF" letter-spacing="1">
+            <textPath xlink:href="#fourthRecordPath" method="align" side="right" startOffset="44%">
+              Zine!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zine!
+            </textPath>
+          </text>
+
+        </g>
+      </a> -->
+
+
     </svg>
   </div>
 
@@ -693,20 +156,14 @@ Z = closepath (close the path) -->
   <div class="container">
 
     <div class="player">
+      <!-- player here -->
+      <div class="radioplayer" data-src="http://streams.radio.co/s7a5fb9da6/listen" data-autoplay="false"
+        data-playbutton="true" data-volumeslider="true" data-elapsedtime="true" data-nowplaying="true"
+        data-showplayer="true" data-volume="50">
+      </div>
     </div>
 
-    <a href="radio_listener.html" target="_blank" style="text-decoration: none;"> CLICK ME </a>
-<!-- 
-    <div style="position: relative; text-align: center; color: white;">
-      <img style="width: 100%; height: auto; margin-top: 5px; margin-bottom: 5px;" src="under-construction.png" alt="under construction!" />
 
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 4em; font-weight: bold; color: white; text-shadow: 2px 2px 4px #000000;">
-        Page under construction!
-      </div>
-    </div> -->
-
-
-    <div style="display:none">
     <div id="lowerHalf">
       <div class="track-list lowerHalfChild" style="margin-right:1%;">
         <h2 style="text-align: center">Previously Played Tracks</h2>
@@ -714,17 +171,21 @@ Z = closepath (close the path) -->
           <li>Track 1 - Artist 1</li>
           <li>Track 2 - Artist 2</li>
           <li>Track 3 - Artist 3</li>
+          <!-- Add more tracks dynamically later -->
         </ul>
       </div>
       <div class="djInfo lowerHalfChild" style="margin-left:1%">
         <div class="current-DJ">
-          <p id="Current-OnDeck">Current DJ(s): <span id="currDJSpan"></span></p>
+          <!-- get current DJ via the DB schedule if exists, and then link their page  -->
+          <p id="Current-OnDeck" >Current DJ(s): <span id="currDJSpan"></span></p>
         </div>
         <div class="Show-Info-up-next">
           <div id="showInfoBox">
             <h2 id="titleShowInfoBox"></h2>
             <div class="showTitleImg">
-              <img id="showImageSpot" src="logo-text-225x255.png" alt="University Radio Station Logo">
+              <img id="showImageSpot"
+                src="imgs/wmbc/logo-text-225x255.png"
+                alt="University Radio Station Logo">
             </div>
             <p id="descShowInfoBox"></p>
           </div>
@@ -786,12 +247,240 @@ Z = closepath (close the path) -->
             </a>
 
           </div>
-        </div>
 
         </div>
       </div>
 
+      <!-- SCHEDULE PAGE!! -->
+      <div id="theSchedule" style="display:none">
+        <a id="clickableLive" class="special-event">
+          <h3 class="special-event" id="specialEventTitlebox"></h3>
+        </a>
 
+        <table class="calendar">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Sunday</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rows for each hour from 11:00 AM to 11:00 PM -->
+            <tr>
+              <td class="hour-mark">11:00 AM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">12:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">1:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">2:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">3:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">4:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">5:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">6:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">7:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">8:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">9:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">10:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hour-mark">11:00 PM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+      <div id="theShowsInfoPageDropdown" style="text-align: center; margin: 20px 0;  display:none;">
+        <select id="showSelecter">
+        </select>
+      </div>
+      <div id="theShowsInfoPage" class="container" style="margin-bottom:20px; display:none;">
+        <div class="showTitleBox">
+          <div class="innerTitleElem" style="margin-right:0px; padding-right:0px; max-width:50%">
+            <h1 id="showName" style="margin-right:0px; padding-right:0px;">Example Show Name</h1>
+          </div>
+
+          <div class="showTitleImg innerTitleElem" style="margin-left:0px; padding-left:0px;">
+            <img id="showImgSlot" style="margin-left:0px;  padding-left:0px;" src="" alt="Radio Show Logo">
+          </div>
+        </div>
+        <h2 id="timeSlot" style="padding-bottom:4px; margin-bottom: 0px; text-align: center;">Mondays @ 11:00am</h2>
+        <div class="showTime-Hosts">
+          <div style="text-align: left">
+
+            <h3 style="padding-top:4px; padding-bottom: 4px; margin: 0px"> Socials:</h3>
+            <div class="socials">
+              <ul id="socialsList" style="padding-top:0px; margin-top: 0px">
+                <!-- <li id="instagram">Insta</li>
+                <li id="twitter">Twitter</li>
+                <li id="'other1">Other</li> -->
+            </div>
+          </div>
+          <div class="host-names" style="text-align: center">
+            <h3 class="hostNames" style="padding-bottom: 0px; margin-bottom: 4px; margin-top:0px;">Your Host(s)</h3>
+            <ul id="hostNamesList">
+              <!-- <li>Host Name</li>
+              <li>This is Long Host Name</li>
+              <li>Host Name</li> -->
+          </div>
+        </div>
+
+        <div id="showBlurbDiv">
+          <h2 id="showBlurbHeader"> About {showName}:</h2>
+          <p id="showBlurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+            dolore eu
+            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+            mollit
+            anim id est laborum</p>
+        </div>
+
+        <div id="pastBroadcastsDiv" style="visibility:hidden; padding: 0px; margin: 0px;">
+          <h2>Past Broadcasts:</h2>
+
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+  </div>
+  <footer class="footer" style="max-width:100%">
+    <p><input id="startTimerButton" type="button" value="WMBC's Web Player," style="display: none;"> <input id="addClock" type="button" value=" made by will :3"></p>
+    </p>
+  </footer>
 </body>
-
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://public.radio.co/playerapi/jquery.radiocoplayer.min.js"></script>
+<script crossorigin="anonymous">
+  $('.radioplayer').radiocoPlayer();
+  // overrideCSS("firstRecord")
+  // overrideCSS("secondRecord")
+  // overrideCSS("thirdRecord")
+</script>
+<script src="src/updatedJS.js"></script>
 </html>
