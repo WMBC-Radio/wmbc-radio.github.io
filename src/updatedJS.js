@@ -270,10 +270,8 @@ function handleSpecialURLParams() {
   const url = window.location.href;
   let urlSuffix = "";
 
-  if (url.includes("radio_listener.html")) {
-    urlSuffix = url.split("radio_listener.html")[1];
-  } else if (url.includes("baseDJPage.html")) {
-    urlSuffix = url.split("baseDJPage.html")[1];
+  if (url.includes("index.html")) {
+    urlSuffix = url.split("index.html")[1];
   }
 
   if (urlSuffix === "?=clock") {
