@@ -1,7 +1,9 @@
 // var env = "production"; // Set to "production" or "development" based on your environment
 var env = "production";
+// var env = "development";
 if (env === 'production') {
   console.log = function () {};
+  //override new Date() to just return new Date("2025-04-09T22:15:00");
 }
 
 const socialIcons = {
@@ -500,7 +502,7 @@ setTimeout(() => {
 //run a getDJ 10 seconds after the page loads just in case the page loads at the start of a show
 setTimeout(() => {
   getDJ();
-}, 10000);
+}, 3000); //ON START 10 seconds load getDJ
 class TrackTimer {
   constructor() {
     this.currentTrack = null;
@@ -602,19 +604,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 var DJ_JSON;
-document.addEventListener("DOMContentLoaded", function () {
-  //Fetch data
-  fetch('./src/showDB_Obscured_encoded.json')
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      DJ_JSON = json;
-      getDJ();
-    })
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   //Fetch data
+//   fetch('./src/showDB_Obscured_encoded.json')
+//     .then((response) => response.json())
+//     .then((json) => {
+//       console.log(json);
+//       DJ_JSON = json;
+//       loadSpecialtyShows();
+//       getDJ();
+
+//     })
+// });
+
+fetch('./src/showDB_Obscured_encoded.json')
+  .then((response) => response.json())
+  .then((json) => {
+    console.log(json);
+    DJ_JSON = json;
+
+    fullInitSync();
+    loadSpecialtyShows();
+    getDJ();
+  })
+  .catch((error) => {
+    console.error("Error fetching JSON:", error);
+  });
+
+
+async function fullInitSync() {
+
+  await loadSpecialtyShows();
+  await getDJ();
+
+
+
+}
+
 
 
 function addCurrentDJInfo(show, onDeck=false){
+  // alert(show.showName);
 
   //Current-OnDeck inner text
   //if onDeck is true, set to "Up Next at (HOUR): (show name)"
@@ -624,8 +654,14 @@ function addCurrentDJInfo(show, onDeck=false){
   // merge all hostNames into one string, decode too
   var hostNames = "";
   var currShowName = show.showName;
+  var isStandard = show.standardShow;
   for (let i = 0; i < show.hostNames.length; i++) {
-    hostNames += decodeName(show.hostNames[i], DECODE_KEY);
+    if(isStandard){
+      hostNames += decodeName(show.hostNames[i], DECODE_KEY);
+    }
+    else{
+      hostNames += show.hostNames[i];
+    }
     if (i === show.hostNames.length - 2) {
       hostNames += ", and ";
     } else if (i < show.hostNames.length - 2) {
@@ -656,6 +692,7 @@ function addCurrentDJInfo(show, onDeck=false){
     document.querySelector("#Current-OnDeck").classList.add("upNextText");
   }
   else{
+
     document.getElementById("Current-OnDeck").innerHTML = 'Current DJ(s): <span id="currDJSpan"></span>';
     document.getElementById("currDJSpan").textContent = hostNames;
     //remove .upNextText class
@@ -678,11 +715,16 @@ function addCurrentDJInfo(show, onDeck=false){
   currShowName = encodeURI(currShowName);
   // set it to changeToShowPage(currShowName) on click
   // newLinkElem.onclick = "changeToShowPage(" + currShowName + ")";
-  document.getElementsByClassName("current-DJ")[0].appendChild(newLinkElem);
+  // alert("show na aaa me: " + currShowName);
+  if(!EVENT_FLAG){
+    document.getElementsByClassName("current-DJ")[0].appendChild(newLinkElem);
+    document.getElementById("showPageLink").addEventListener("click", function() {
+      changeToShowPage(currShowName);
+    });
+  }
 
-  document.getElementById("showPageLink").addEventListener("click", function() {
-    changeToShowPage(currShowName);
-  });
+
+  // alert("test test test");
   // if we have a dj, replace the info with the live dj info
   // <div id="showInfoBox">
   // <h2 id="titleShowInfoBox"></h2>
@@ -690,14 +732,21 @@ function addCurrentDJInfo(show, onDeck=false){
 
 
   //hide this if onDeck is true
+  
   if (onDeck) {
     document.querySelector(".Show-Info-up-next").style.display = "none";
-    document.querySelector("#showPageLink").style.display = "none";
+    if(EVENT_FLAG === false){
+      document.querySelector("#showPageLink").style.display = "none";
+    }
   }
   else{
     document.querySelector(".Show-Info-up-next").style.display = "";
-    document.querySelector("#showPageLink").style.display = "";
+    if(EVENT_FLAG === false){
+      document.querySelector("#showPageLink").style.display = "";
+    }
+    
   }
+  
   document.getElementById("titleShowInfoBox").textContent = show.showName;
   document.getElementById("descShowInfoBox").textContent = show.showBlurb;
   if (show.image === "") {
@@ -716,8 +765,121 @@ function addCurrentDJInfo(show, onDeck=false){
 // function determineOnDeckDJ(shows) {
   
 // }
+var EVENT_FLAG = false;
 
-function getDJ(demoDate = "BAH") {
+function getSpecialEventDJ(demoDate = "BAH") {
+  var now = new Date();
+  var day = now.getDay();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  console.log(demoDate);
+  if (demoDate !== "BAH") {
+    console.log("demo date");
+    now = new Date(demoDate);
+    day = now.getDay();
+    hour = now.getHours();
+    minute = now.getMinutes();
+  }
+
+  var time = hour + ":" + minute;
+  var dayString = "";
+  switch (day) {
+    case 0:
+      dayString = "Sunday";
+      break;
+    case 1:
+      dayString = "Monday";
+      break;
+    case 2:
+      dayString = "Tuesday";
+      break;
+    case 3:
+      dayString = "Wednesday";
+      break;
+    case 4:
+      dayString = "Thursday";
+      break;
+    case 5:
+      dayString = "Friday";
+      break;
+    case 6:
+      dayString = "Saturday";
+      break;
+  }
+
+  // Filter shows for today
+  var showsToday = DJ_JSON.filter(show => show.broadcastTime.dayOfWeek === dayString);
+
+  // Sort shows by start time
+  showsToday.sort(function (a, b) {
+    var aTime = a.broadcastTime.startTime.split(":");
+    var bTime = b.broadcastTime.startTime.split(":");
+    var aHour = parseInt(aTime[0]);
+    var bHour = parseInt(bTime[0]);
+    var aMinute = parseInt(aTime[1]);
+    var bMinute = parseInt(bTime[1]);
+
+    if (aHour === bHour) {
+      return aMinute - bMinute;
+    } else {
+      return aHour - bHour;
+    }
+  });
+
+  console.log("shows today");
+  console.log(showsToday);
+
+  // Prioritize non-standard shows
+  var prioritizedShows = showsToday.filter(show => !show.standardShow);
+  var remainingShows = showsToday.filter(show => show.standardShow);
+  showsToday = [...prioritizedShows, ...remainingShows];
+
+  // Iterate through the shows and find the one that is currently playing
+  for (let show of showsToday) {
+    const runHour = parseInt(show.broadcastTime.startTime.split(":")[0]);
+    const runMinutes = parseInt(show.broadcastTime.startTime.split(":")[1]);
+    const runDuration = show.broadcastTime.durationMinutes;
+
+    const endHour = (runHour + Math.floor(runDuration / 60)) % 24;
+    const endMinutes = (runMinutes + runDuration % 60) % 60;
+
+    if (hour < runHour) {
+      console.log("upcoming show");
+      console.log(show);
+      return addCurrentDJInfo(show, true);
+      
+    }
+    if (hour >= runHour && hour < endHour) {
+      if (hour === endHour && minute > endMinutes) {
+        continue;
+      }
+      if(EVENT_FLAG === true){
+        if(show.standardShow === false){
+          return addCurrentDJInfo(show);
+        }
+      }
+      else{
+        return addCurrentDJInfo(show);
+      }
+    }
+  }
+
+  console.log("no live DJ");
+  document.querySelector(".current-DJ").style.display = "none";
+  document.getElementById("titleShowInfoBox").innerText = "";
+  document.getElementById("descShowInfoBox").innerText = "";
+  document.querySelector(".Show-Info-up-next").style.display = "none";
+  document.querySelector(".djInfo").classList.remove("djInfo-margin-fix");
+}
+
+//in the format of new Date("2025-02-21T12:30:00");
+// write the date for wednesday at 12:30 PM
+//new Date("2025-02-21T12:30:00");
+async function getDJ(demoDate = "BAH") {
+  if(EVENT_FLAG) {
+    getSpecialEventDJ(demoDate);
+    return;
+  }
   
   var now = new Date();
   var day = now.getDay();
@@ -898,21 +1060,21 @@ function decodeName(encodedName, key) {
   return new TextDecoder().decode(decodedBytes);
 }
 
-var DJ_JSON;
-document.addEventListener("DOMContentLoaded", function () {
-  //Fetch data
-  fetch('./src/showDB_Obscured_encoded.json')
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      DJ_JSON = json;
-      loadSpecialtyShows();
-    })
-});
+// var DJ_JSON;
+// document.addEventListener("DOMContentLoaded", function () {
+//   //Fetch data
+//   fetch('./src/showDB_Obscured_encoded.json')
+//     .then((response) => response.json())
+//     .then((json) => {
+//       console.log(json);
+//       DJ_JSON = json;
+//       loadSpecialtyShows();
+//     })
+// });
 
 
-
-function loadSpecialtyShows() {
+//is always run so 
+async function loadSpecialtyShows() {
   const bkup_DJ = DJ_JSON;
   fetch('./src/specialEvents.json')
     .then((response) => response.json())
@@ -920,16 +1082,41 @@ function loadSpecialtyShows() {
       console.log(json);
       //append to existing array of shows
       //remove the first element, which is the header
+      const now = new Date();
       if (json.length === 0) {
         console.log("no special events");
         populateSchedule();
+        return false; 
+      }
+      
+      json[0].runTime.dayOfWeek = json[0].runTime.dayOfWeek.charAt(0).toUpperCase() + json[0].runTime.dayOfWeek.slice(1);
+      console.log(json[0].runTime.dayOfWeek);
+      if (json[0].runTime.dayOfWeek !== Object.keys(dayToIndex)[now.getDay()]) {
+        console.log("not the same day, not loading specialty shows");
+        console.log(json[0].runTime.dayOfWeek);
+        console.log(Object.keys(dayToIndex)[now.getDay()]);
+        populateSchedule();
         return;
       }
+      //check if same date as today, otherwise dont load
+      
+      
+      // json[0].runTime.dayOfWeek = json[0].runTime.dayOfWeek.charAt(0).toUpperCase() + json[0].runTime.dayOfWeek.slice(1);
+      // console.log(json[0].runTime.dayOfWeek);
+      // console.log(now.getDay());
+      // if (json[0].runTime.dayOfWeek !== Object.keys(dayToIndex)[now.getDay()]) {
+      //   console.log("not the same day, not loading specialty shows");
+      //   console.log(json[0].runTime.dayOfWeek);
+      //   console.log(Object.keys(dayToIndex)[now.getDay()]);
+      //   populateSchedule();
+      //   return;
+      // }
+      EVENT_FLAG = true;
       if (!json[0].hasOwnProperty("eventTitle") || !json[0].hasOwnProperty("eventDescription") || !json[0].hasOwnProperty("runTime")) {
         console.log("incorrectly formatted specialty show list!");
         DJ_JSON = bkup_DJ;
         populateSchedule();
-        return;
+        return false;
       }
 
       const eventInfoJson = json.shift();
@@ -938,7 +1125,7 @@ function loadSpecialtyShows() {
       console.log(eventInfoJson)
       console.log("passing event title to populate schedule");
       populateSchedule(eventInfoJson)
-      return;
+      return true;
     }).catch(error => {
       console.log(error);
       console.log("SHOULD ONLY HIT ON FAILURE");
@@ -946,7 +1133,7 @@ function loadSpecialtyShows() {
 
       DJ_JSON = bkup_DJ;
       populateSchedule();
-      return;
+      return false;
     });
 
 
@@ -987,8 +1174,7 @@ const highlightCurrentHour = () => {
   //add a check to see if the current hour cell also has the class "show-cell"
   //if so, overwrite the <p> tag to read "Now Playing!"
   //wait until 
-  const currentHourCell = document.querySelector(".current-hour");
-  if (currentHourCell) {
+  const currentHourCell = document.querySelector(".current-hour");  if (currentHourCell) {
     console.log("current cell found");
     var classList = currentHourCell.classList
     if (classList.contains("show-cell")) {
@@ -1027,14 +1213,18 @@ function loadHostNamesa(hostNames, DECODE_KEY) {
   return outputNames;
 }
 
-function isEventLive(eventInfoJson) {
+function isEventLive(eventInfoJson, demoDate="BAH") {
   //determine if event is currently running via runTime
   // "runTime": {
   //   "dayOfWeek": "Monday",
   //   "startTime": "12:00",
   //   "durationMinutes": 660
   // } 
-  const now = new Date();
+  var now = new Date();
+  if (demoDate !== "BAH") {
+    console.log("demo date");
+    now = new Date(demoDate);
+  }
   const currentHour = now.getHours();
   const currentMinutes = now.getMinutes();
   const currentDay = now.getDay();
@@ -1061,6 +1251,7 @@ function isEventLive(eventInfoJson) {
   return false;
 
 }
+var eventInfoJRJRJR;
 function populateSchedule(eventInfoJson = { eventTitle: "!NOEVENT", eventDescription: "", runTimeStr: "", runTime: "" }) {
 
 
@@ -1071,12 +1262,13 @@ function populateSchedule(eventInfoJson = { eventTitle: "!NOEVENT", eventDescrip
     const specialEventLink = document.getElementById("clickableLive");
     let eventDisplayTitle = eventInfoJson.eventTitle + " " + eventInfoJson.runTimeStr + "! ";
 
-
+    eventInfoJRJRJR = eventInfoJson;
     const isLiveBool = isEventLive(eventInfoJson);
+    
     specialEventTitle.innerHTML = eventDisplayTitle + `<span id="isLiveDot" style="color=var(--Red)">${isLiveBool ? "●LIVE" : ""}</span>`;
-    if (isLiveBool) {
-      specialEventLink.href = "radio_listener.html";
-    }
+    // if (isLiveBool) {
+    //   specialEventLink.href = "radio_listener.html";
+    // }
     specialEventLink.classList.add("special-event-enabled");
     specialEventTitle.classList.add("special-event-enabled");
 
@@ -1360,19 +1552,19 @@ function loadHostNames(hostNames, DECODE_KEY) {
     }
   });
 }
-var DJ_JSON;
-document.addEventListener("DOMContentLoaded", function () {
-  //Fetch data
-  fetch('./src/showDB_Obscured_encoded.json')
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      DJ_JSON = json;
-      //load the schedule
-      // generatePage();
-    })
+// var DJ_JSON;
+// document.addEventListener("DOMContentLoaded", function () {
+//   //Fetch data
+//   fetch('./src/showDB_Obscured_encoded.json')
+//     .then((response) => response.json())
+//     .then((json) => {
+//       console.log(json);
+//       DJ_JSON = json;
+//       //load the schedule
+//       // generatePage();
+//     })
 
-});
+// });
 
 function decodeName(encodedName, key) {
   // Decode the Base64 string
