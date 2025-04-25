@@ -261,6 +261,7 @@ header {
   margin-top: 20px;
 }
 .track-list h2 {
+  font-size:25px;
   color: var(--Gold);
 }
 .socials {
@@ -537,7 +538,7 @@ header h1 {
 
 .radioco-elapsedTime {
   opacity: 0.4;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .custom-elapsed-time {
@@ -936,7 +937,7 @@ header h1 {
     width: 100%;
   }
 
-  .showElemDiv h3 {
+  .sh_nm {
     font-size: 0.9em !important;
   }
 
@@ -956,6 +957,7 @@ header h1 {
   background-color: var(--AOK-Teal);
   color: var(--Gold);
   font-weight: bold;
+  font-size: 25px;
 }
 
 .calendar td {
@@ -981,8 +983,8 @@ header h1 {
   color: black !important;
 }
 
-.calendar td.current-hour h3 {
-  color: var(--Red) !important;
+.calendar td.current-hour .sh_nm {
+  color: #0000ff !important;/*var(--Red) !important;*/
 }
 
 
@@ -1040,20 +1042,31 @@ header h1 {
   font-size: 12px;
 }
 
-.showElemDiv h3 {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  font-size: 1em;
-  color: var(--Gold);
-}
 
-.showElemDiv p {
+.sh_nm {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+.showElemDiv .othTxt{
   margin: 0;
   padding: 0;
   text-align: center;
   font-size: 0.8em;
   color: white;
+}
+
+.sh_nm {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 14pt; /*1.4em;*/
+  color: var(--Gold);
 }
 
 .specialEvent {
