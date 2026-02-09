@@ -1774,6 +1774,21 @@ Z = closepath (close the path) -->
           </thead>
           <tbody>
             <!-- Rows for each hour from 11:00 AM to 11:00 PM -->
+
+            <tr>
+              <td class="hour-mark">10:00 AM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+
+
+
             <tr>
               <td class="hour-mark">11:00 AM</td>
               <td></td>
@@ -3311,7 +3326,7 @@ function populateSchedule(eventInfoJson = { eventTitle: "!NOEVENT", eventDescrip
 
     //console.log(standardShow);
     //const previousPlaylists = show.previousPlaylists;
-    const row = rows[startTime - 11];
+    const row = rows[startTime - 10];
     const cell = row.children[dayIndex + 1];
     const showElement = document.createElement("div");
     //check if already has a show

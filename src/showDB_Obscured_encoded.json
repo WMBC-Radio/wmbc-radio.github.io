@@ -300,7 +300,7 @@
 
 {
   "name": "Dean and Nat",
-  "showName": "Dean & Nat",
+  "showName": "wmbcgate",
   "hostNames": [
     "DJ Nat",
     "Dean L."
@@ -1263,5 +1263,131 @@
   "image": "",
   "previousPlaylists": [],
   "customFormatting": ""
+},
+
+
+{
+  "name": "MorningShow_Monday",
+  "showName": "Morning Show",
+  "hostNames": [
+    "WMBC Morning Show Team"
+
+  ],
+  "broadcastTime": {
+    "dayOfWeek": "Monday",
+    "startTime": "10:00",
+    "durationMinutes": 60
+  },
+  "socials": {
+    "instagram": "",
+    "spotify": [],
+    "twitter": "",
+    "otherSocials": []
+  },
+  "showBlurb": "Tune into the Morning Show! fun content :)",
+  "standardShow": true,
+  "image": "",
+  "previousPlaylists": [],
+  "customFormatting": ""
+},
+  {
+  "name": "MorningShow_Tuesday",
+  "showName": "Morning Show",
+  "hostNames": [
+    "WMBC Morning Show Team"
+
+  ],
+  "broadcastTime": {
+    "dayOfWeek": "Tuesday",
+    "startTime": "10:00",
+    "durationMinutes": 60
+  },
+  "socials": {
+    "instagram": "",
+    "spotify": [],
+    "twitter": "",
+    "otherSocials": []
+  },
+  "showBlurb": "Tune into the Morning Show! fun content :)",
+  "standardShow": true,
+  "image": "",
+  "previousPlaylists": [],
+  "customFormatting": ""
+},
+
+  {
+  "name": "MorningShow_Wednesday",
+  "showName": "Morning Show",
+  "hostNames": [
+    "WMBC Morning Show Team"
+
+  ],
+  "broadcastTime": {
+    "dayOfWeek": "Wednesday",
+    "startTime": "10:00",
+    "durationMinutes": 60
+  },
+  "socials": {
+    "instagram": "",
+    "spotify": [],
+    "twitter": "",
+    "otherSocials": []
+  },
+  "showBlurb": "Tune into the Morning Show! fun content :)",
+  "standardShow": true,
+  "image": "",
+  "previousPlaylists": [],
+  "customFormatting": ""
+},
+
+{
+  "name": "MorningShow_Thursday",
+  "showName": "Morning Show",
+  "hostNames": [
+    "WMBC Morning Show Team"
+
+  ],
+  "broadcastTime": {
+    "dayOfWeek": "Thursday",
+    "startTime": "10:00",
+    "durationMinutes": 60
+  },
+  "socials": {
+    "instagram": "",
+    "spotify": [],
+    "twitter": "",
+    "otherSocials": []
+  },
+  "showBlurb": "Tune into the Morning Show! fun content :)",
+  "standardShow": true,
+  "image": "",
+  "previousPlaylists": [],
+  "customFormatting": ""
+},
+
+{
+  "name": "MorningShow_Monday",
+  "showName": "Morning Show",
+  "hostNames": [
+    "WMBC Morning Show Team"
+
+  ],
+  "broadcastTime": {
+    "dayOfWeek": "Friday",
+    "startTime": "10:00",
+    "durationMinutes": 60
+  },
+  "socials": {
+    "instagram": "",
+    "spotify": [],
+    "twitter": "",
+    "otherSocials": []
+  },
+  "showBlurb": "Tune into the Morning Show! fun content :)",
+  "standardShow": true,
+  "image": "",
+  "previousPlaylists": [],
+  "customFormatting": ""
 }
+
 ]

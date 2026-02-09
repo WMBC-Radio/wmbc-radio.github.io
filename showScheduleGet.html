@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+
+:root {
+  --Black: #000000;
+  /* CMYK: 0, 0, 0, 100 | RGB: 0, 0, 0 */
+  --Gold: #fdb515;
+  /* CMYK: 0, 32, 100, 0 | RGB: 253, 181, 21 */
+  --Red: #da2128;
+  /* CMYK: 10, 100, 100, 0 | RGB: 218, 33, 40 */
+  --Light-Gray: #c7c8ca;
+  /* CMYK: 0, 0, 0, 25 | RGB: 199, 200, 202 */
+  --AOK-Teal: #007176;
+  /* CMYK: 100, 35, 50, 20 | RGB: 0, 113, 118 */
+  --Retriever-Brown: #a67a05;
+  /* CMYK: 0, 30, 100, 40 | RGB: 166, 122, 5 */
+  --Dark-Gray: #636466;
+  /* CMYK: 0, 0, 0, 75 | RGB: 99, 100, 102 */
+  --current-translate: 0%;
+
+
+  /* record vars */
+  /* it used to be ~r=80, 30.  */
+  --rec-cx-1: 45%;
+  --rec-cy-1: 115%;
+  --rec-r-1: 14%;
+  --rec-cx-2: 50%;
+  --rec-cy-2: 50%;
+  --rec-r-2: 50%;
+
+}
+
+:root {
+  --Black: #000000;
+  /* CMYK: 0, 0, 0, 100 | RGB: 0, 0, 0 */
+  --Gold: #fdb515;
+  /* CMYK: 0, 32, 100, 0 | RGB: 253, 181, 21 */
+  --Red: #da2128;
+  /* CMYK: 10, 100, 100, 0 | RGB: 218, 33, 40 */
+  --Light-Gray: #c7c8ca;
+  /* CMYK: 0, 0, 0, 25 | RGB: 199, 200, 202 */
+  --AOK-Teal: #007176;
+  /* CMYK: 100, 35, 50, 20 | RGB: 0, 113, 118 */
+  --Retriever-Brown: #a67a05;
+  /* CMYK: 0, 30, 100, 40 | RGB: 166, 122, 5 */
+  --Dark-Gray: #636466;
+  /* CMYK: 0, 0, 0, 75 | RGB: 99, 100, 102 */
+}
+
+.tabs {
+  background-color: var(--AOK-Teal);
+  padding: 10px 0;
+  text-align: center;
+}
+
+.tabs ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tabs li {
+  display: inline;
+}
+
+.tabs a {
+  color: var(--Gold);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.tabs a:hover {
+  background-color: var(--Retriever-Brown);
+  color: white;
+}
+
+.tabs a:active {
+  background-color: var(--Gold);
+  color: var(--Black);
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+  .container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+
+  .logo-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  footer {
+    position: static;
+    padding: 10px;
+  }
+
+}
+
+.container {
+  max-width: 800px;
+  background-color: #ffffff;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+body {
+  background-color: var(--Light-Gray);
+  color: var(--Black);
+}
+
+header {
+  background-color: var(--AOK-Teal);
+  color: var(--Gold);
+}
+
+footer {
+  background-color: var(--AOK-Teal);
+  color: var(--Gold);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: var(--Black);
+  color: var(--Gold);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--Light-Gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--Gold);
+}
+
+.logo-circle img {
+  width: 100%;
+  height: auto;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--Gold);
+}
+
+footer {
+  text-align: center;
+  padding: 2px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top:0px;
+  margin-bottom:0px;
+  padding-top:0px;
+  padding-bottom: 0px;
+}
+
+.footer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top:0px;
+  margin-bottom:0px;
+  padding-top:2px;
+  padding-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+  #lowerHalf {
+    flex-direction: column-reverse;
+  }
+  .container{
+    width:auto;
+  }
+  header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .lowerHalfChild{
+    width: auto  !important;
+  }
+  .radioco-information {
+    padding: 0px !important;
+    float: none;
+  }
+
+  .logo-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  .radioco-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  .container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+
+  .radioco-elapsedTime {
+    margin-top: 0px !important;
+  }
+
+  .radioco-volume {
+    margin-top: 0px !important;
+    margin-bottom: 10px !important;
+    display: none !important;
+  }
+
+  .player iframe {
+    height: 120px;
+  }
+
+
+
+  .track-list h2 {
+    font-size: 18px;
+  }
+
+  .track-list li {
+    padding: 6px 0;
+    font-size: 14px;
+  }
+
+
+  .radioplayer {
+    width: 80%;
+    height: 30%;
+    padding: 15px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 5px !important;
+  }
+
+  .player iframe {
+    height: 120px;
+  }
+
+  .track-list {
+    padding: 10px;
+    
+
+  }
+
+  .track-list h2 {
+    font-size: 18px;
+  }
+
+  .track-list li {
+    padding: 6px 0;
+    font-size: 14px;
+  }
+
+
+  .radioco-playButton {
+    font-size: 40px;
+    /* margin-bottom: 10px; */
+    /* margin-top: -10px; */
+  }
+
+  .radioco-information {
+    width: 100%;
+    text-align: center;
+  }
+
+  .radioco-information span.radioco-nowPlaying {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .radioco-information input[type="range"] {
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  .radioco-image {
+    width: 60px !important;
+    height: 60px !important;
+    margin: 0px !important;
+    margin-left: -10px !important;
+    /* display: none; */
+  }
+
+  .radioco-bg {
+    display: none;
+  }
+
+  .radioco-elapsedTime {
+    display: block;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 10px;
+  }
+
+  .radioco-playButton {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px !important;
+    float: right;
+
+  }
+
+  footer {
+    position: static;
+    padding: 10px;
+    padding-left:0px;
+    padding-right:0px;
+  }
+
+}
+
+body {
+  background-color: var(--Light-Gray);
+  color: var(--Black);
+}
+
+header {
+  background-color: var(--AOK-Teal);
+  color: var(--Gold);
+}
+
+.track-list {
+  background-color: var(--Dark-Gray);
+  color: white;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  
+}
+
+#lowerHalf{
+  width:100%;
+  display: flex; 
+}
+
+.lowerHalfChild{
+  display:inline-block;
+  width:100%;
+  margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+
+.Show-Info-up-next{
+  background-color: var(--Dark-Gray);
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  height:auto;
+}
+.Show-Info-about-WMBC{
+  background-color: var(--Dark-Gray);
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  height:100%;
+}
+.djInfo{
+  
+  color: white;
+
+  /* padding: 15px; */
+  padding-right: 8px;
+  padding-top:0px;
+  padding-bottom: 0px;
+  border-radius: 8px;
+
+}
+
+.djInfo-margin-fix{
+  margin-top: 20px;
+}
+.track-list h2 {
+  font-size:25px;
+  color: var(--Gold);
+}
+.socials {
+  display: flex; 
+  justify-content: center; 
+  gap: 5em;
+}
+.socials a{
+  font-size: 1em !important;
+  color: var(--Gold);
+}
+.socials svg {
+  width: 2em;
+  height: 2em;
+  vertical-align: middle;
+  margin-right: 0.1em;
+}
+.socials img{
+  width: 2em;
+  height: 2em;
+  vertical-align: middle;
+  margin-right: 0.1em;
+}
+footer {
+  background-color: var(--AOK-Teal);
+  color: var(--Gold);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: var(--Black);
+  color: var(--Gold);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--Light-Gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--Gold);
+}
+
+.logo-circle img {
+  width: 100%;
+  height: auto;
+}
+
+.radioco-image {
+  float: left;
+}
+
+
+.radioco-information {
+  float: left;
+  padding-right: 20%;
+
+
+}
+
+.radioco-bg {
+  visibility: hidden;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--Gold);
+}
+
+.container {
+  max-width: 800px;
+  background-color: #ffffff;
+  margin: 20px auto;
+  margin-top:5px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.player {
+  margin-bottom: 20px;
+}
+
+.player iframe {
+  width: 100%;
+  height: 150px;
+  border: none;
+  border-radius: 8px;
+}
+
+
+
+.track-list h2 {
+  margin-top: 0;
+}
+
+.track-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.track-list img {
+  box-shadow: #000000 2px 4px 2px 0px;
+}
+
+.track-list li {
+  padding: 8px 0;
+}
+
+.track-list li:last-child {
+  border-bottom: none;
+}
+
+.radioplayer {
+  background: var(--Dark-Gray);
+  padding: 20px;
+  height: 130px;
+  box-shadow: #ccc 0px 1px 50px;
+  border-radius: 4px;
+  margin: 20px auto;
+  overflow: hidden;
+  color: white;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  overflow: hidden;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radioco-image {
+  vertical-align: middle;
+  margin-left: -10px;
+  margin-top: -10px;
+  position: relative;
+  box-shadow: #000000 2px 4px 4px 0px;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+}
+
+.radioco-playButton {
+  color: var(--Gold);
+}
+
+.radioco-information {
+  display: block;
+  position: relative;
+  width: 340px;
+  color: #fff;
+  z-index: 1;
+  float: right;
+  top: 13px;
+  font-family: 'Open Sans', sans-serif;
+
+
+}
+
+.radioco-information input[type="range"] {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.radioco-information input[type=range]::-webkit-slider-thumb {
+  background: var(--Gold);
+}
+
+.radioco-information input[type="range"] {
+  background: rgba(255, 255, 255, 0.3);
+  width: 100px;
+  display: block;
+  height: 4px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: -webkit-grab;
+  outline: 0;
+}
+
+.special-event h3 {
+  text-align: center;
+  font-size: 1.5em;
+  color: white;
+  background-color: var(--AOK-Teal);
+  padding: 10px;
+  border-radius: 10px;
+  /* animation: festive 10s infinite alternate; */
+}
+
+@keyframes festive {
+  0% {
+    background-color: var(--AOK-Teal);
+  }
+
+  100% {
+    background-color: var(--Gold);
+  }
+}
+
+.radioco-information {
+  margin-top: -20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.radioco-playButton {
+  font-size: 55px;
+  /* why does this add a margin to the parent? 
+      /* fix this  */
+  margin-top: 45px;
+
+  float: right;
+
+}
+
+.radioco-playButton-playing:before {
+  font-family: 'FontAwesome', sans-serif;
+  display: block;
+  float: right;
+  content: "\f04b";
+
+}
+
+.radioco-playButton-paused:before {
+  font-family: 'FontAwesome', sans-serif;
+  display: block;
+  float: right;
+  content: "\f04c";
+}
+
+.radioco-information input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  background: #ffffff;
+  -webkit-transition: box-shadow 0.2s;
+
+}
+
+.radioco-information input[type=range]::-webkit-slider-thumb:hover {
+  box-shadow: #fff 1px 1px 20px;
+}
+
+.radioco-information input[type=range]:active,
+.information input[type=range]:focus {
+  outline: 0;
+}
+
+.radioco-information {
+  max-width: 100%;
+}
+
+.radioco-elapsedTime {
+  opacity: 0.4;
+  font-size: 18px;
+}
+
+.custom-elapsed-time {
+  opacity: 0.4;
+  font-size: 14px;
+}
+
+#startTimerButton {
+  all: unset;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  display: inline;
+  vertical-align: baseline;
+  padding: 0;
+  margin: 0;
+}
+
+#startTimerButton:hover {
+  text-decoration: underline;
+}
+
+#addClock {
+  all: unset;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  display: inline;
+  vertical-align: baseline;
+  padding: 0;
+  margin: 0;
+}
+
+#addClock:hover {
+  text-decoration: underline;
+}
+
+
+.current-DJ {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--Dark-Gray);
+  padding: 10px;
+  margin: 0px 0px;
+/* background-color: var(--Dark-Gray); */
+  /* margin-bottom: 20px; */
+  padding-bottom: 20px;
+
+  border-radius: 8px;
+  color: white;
+}
+
+.Show-Info-about-WMBC{
+  background-color: var(--Dark-Gray);
+  /* margin-top: 20px; */
+  padding: 15px;
+  border-radius: 8px;
+  height:100%;
+}
+#getInvolvedTitle{
+  color: var(--Gold);
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align:center;
+}
+#getInvolvedText{
+  color: white;
+  font-size: 20px;
+  text-align:center;
+}
+
+
+/* children of current-DJ */
+.current-DJ p,
+.current-DJ a {
+  padding: 0px 20px;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.socials img {
+  width: 30px;
+  height: 30px;
+}
+.current-DJ span {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--Gold);
+}
+
+#showPageLink {
+  color: var(--Gold);
+  background-color: var(--AOK-Teal);
+  padding: 4px 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#showPageLink:hover {
+  background-color: var(--Red);
+}
+
+
+.recordImgContainer{
+
+  background-color:#ffffff;
+  position: relative;
+  max-width: 100%; 
+  height: 150px;
+  overflow: hidden;
+  z-index: 10;
+
+}
+
+.recordImgContainer img{
+  padding-left: 34%;
+}
+
+@media (max-width: 1008px) {
+  .recordImgContainer img{
+    width: 25% !important;
+    height: 100% !important;
+    padding-left: 5%;
+  }
+  .under{
+    width: 25% !important;
+    height: 100% !important;
+  }
+  
+}
+
+@media (max-width: 700px) {
+  .recordImgContainer img{
+    width: 30% !important;
+    height: 80% !important;
+    padding-left: 0%; 
+  }
+  .under{
+    width: 25% !important;
+    height: 100% !important;
+  }
+  /* change glorpus svg viewbox to 0 200 1000 200*/
+
+}
+
+
+.under {
+  position: absolute;
+  left: 0px;
+  bottom:0px;
+  z-index: -1;
+  width: 9%;
+  height: auto;
+  
+}
+
+.over {
+  position: absolute;
+  left: 0px;
+    bottom:0px;
+  z-index: -1;
+  width: 9%;
+  height: auto;
+  
+
+}
+.prev-info-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+.prev-info-li{
+    display: flex;
+    width:100%;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--Dark-Gray);
+    color: white;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.moveItMoveIt {
+  animation: over 1s infinite;
+}
+
+/* over animation translate left and right  */
+@keyframes over {
+  0% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(-5px);
+  }
+}
+
+
+#firstRecord:hover {
+  animation-delay: 0s, 0.2s;
+  /* animation-name: lift, spinCircleSVGs; */
+  animation-name: lift, spinCircleSVGs;
+  animation-duration: 0.2s, 5s;
+  animation-timing-function: ease-in, linear;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards;
+
+  /* animation: lift 0.5s ease-in forwards, spinCircleSVGs 5s linear infinite; */
+
+  transform-origin: 45% 115%;
+}
+
+#firstRecord {
+  /* animation: unlift 0.5s ease-out forwards; */
+  animation: unlift 0.2s ease-out forwards;
+}
+
+#secondRecord:hover {
+  animation-delay: 0s, 0.2s;
+  animation-name: lift, spinCircleSVGs;
+  animation-duration: 0.2s, 5s;
+  animation-timing-function: ease-in, linear;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards;
+
+  /* animation: lift 0.5s ease-in forwards, spinCircleSVGs 5s linear infinite; */
+
+  transform-origin: 68% 115%;
+}
+
+#secondRecord {
+  animation: unlift 0.2s ease-out forwards;
+}
+
+#thirdRecord:hover {
+  animation-delay: 0s, 0.2s;
+  animation-name: lift, spinCircleSVGs;
+  animation-duration: 0.2s, 5s;
+  animation-timing-function: ease-in, linear;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards;
+
+  /* animation: lift 0.5s ease-in forwards, spinCircleSVGs 5s linear infinite; */
+
+  transform-origin: 91% 115%;
+}
+
+
+#thirdRecord {
+  animation: unlift 0.2s ease-out forwards;
+}
+
+#fourthRecord:hover {
+  animation-delay: 0s, 0.2s;
+  animation-name: lift, spinCircleSVGs;
+  animation-duration: 0.2s, 5s;
+  animation-timing-function: ease-in, linear;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards;
+
+  /* animation: lift 0.5s ease-in forwards, spinCircleSVGs 5s linear infinite; */
+
+  transform-origin: 114% 115%;
+}
+
+
+#fourthRecord {
+  animation: unlift 0.2s ease-out forwards;
+}
+/* var(--current-translate, 0%) */
+@keyframes lift {
+  0% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    transform: translateY(-30%);
+  }
+}
+
+@keyframes unlift {
+  0% {
+    transform: translateY(-30%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes liftRec1 {
+  0% {
+    transform: translateY(var(--current-translate, 0%));
+  }
+
+  100% {
+    transform: translateY(-30%);
+  }
+}
+
+@keyframes unliftRec1 {
+  0% {
+    transform: translateY(var(--current-translate, -30%));
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+/* how do i spin it around an origin? */
+@keyframes spinCircleSVGs {
+  0% {
+    transform: translateY(-30%) rotateZ(0deg);
+  }
+
+  100% {
+    transform: translateY(-30%) rotateZ(360deg);
+  }
+}
+
+
+
+.showTitleImg {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--Light-Gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--Gold);
+  /* align vertically and horizantally center */
+  margin: auto;
+  padding:0px;
+}
+
+
+.showTitleImg img {
+  width: 100%;
+  height: auto;
+}
+/* .currentRecord{
+    animation: spinCircleSVGs 10s linear infinite;
+    transform-origin: 50% 50%;
+} */
+/* if we have a dj, replace the info with the live dj info
+  <div id="showInfoBox">
+  <h2 id="titleShowInfoBox"></h2>
+   <p id="descShowInfoBox"></p>
+   */
+#titleShowInfoBox{
+  color: var(--Gold);
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align:center;
+}
+#descShowInfoBox{
+  color: white;
+  font-size: 20px;
+  text-align:center;
+}
+
+
+/* SCHEDULE */
+
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  margin: 20px 0;
+  table-layout: fixed;
+}
+
+
+@media (max-width: 768px) {
+  .calendar {
+    width: 100%;
+  }
+
+  .sh_nm {
+    font-size: 0.9em !important;
+  }
+
+  .showElemDiv p {
+    font-size: 0.6em !important;
+  }
+}
+
+.calendar th,
+.calendar td {
+  border: 1px solid var(--Light-Gray);
+  padding: 8px;
+  text-align: center;
+}
+
+.calendar th {
+  background-color: var(--AOK-Teal);
+  color: var(--Gold);
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.calendar td {
+  height: 40px;
+  position: relative;
+}
+
+.calendar td.hour-mark {
+  background-color: var(--Light-Gray);
+  font-weight: bold;
+  color: var(--Black);
+  width: 80px;
+}
+
+.current-hour {
+  background-color: var(--Gold) !important;
+  color: black !important;
+}
+
+.calendar td.current-hour,
+.calendar td.current-hour p,
+.calendar td.current-hour a {
+  color: black !important;
+}
+
+.calendar td.current-hour .sh_nm {
+  color: #0000ff !important;/*var(--Red) !important;*/
+}
+
+
+.calendar .show-block {
+  background-color: var(--Retriever-Brown);
+  color: white;
+
+}
+
+.show-cell {
+  background-color: var(--AOK-Teal);
+}
+
+.special-event h3 {
+  text-align: center;
+  font-size: 1.5em;
+  color: white;
+  background-color: var(--AOK-Teal);
+  padding: 10px;
+  border-radius: 10px;
+  /* animation: festive 10s infinite alternate; */
+}
+
+@keyframes festive {
+  0% {
+    background-color: var(--AOK-Teal);
+  }
+
+  100% {
+    background-color: var(--Gold);
+  }
+}
+
+.showElemDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  padding: 4px;
+  padding-left:1px;
+  padding-right:1px;
+  border-radius: 4px;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+
+.sh_nm {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+.showElemDiv .othTxt{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0.8em;
+  color: white;
+}
+
+.sh_nm {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 14pt; /*1.4em;*/
+  color: var(--Gold);
+}
+
+.specialEvent {
+  background-color: var(--Dark-Gray);
+  color: white;
+}
+
+.special-event-enabled span{
+  /* color: var(--Red); */
+  animation: weAreLive 3s infinite alternate;
+}
+
+
+@keyframes weAreLive {
+  0% {
+    color: white;
+  }
+  30% {
+    color: white;
+  }
+  70% {
+    color: var(--Red);
+  }
+
+  100% {
+    color: var(--Red);
+  }
+}
+
+#specialEventTitlebox {
+  visibility: hidden;
+  /*10 padding all around default
+24 margin top bottom default*/
+  padding: 0px;
+  margin:0px;
+}
+
+.special-event-enabled {
+  visibility: visible !important;
+}
+.special-event-enabled h3{
+  padding: 10px !important;
+  margin: 0 24px !important;
+
+}
+
+#clickableLive {
+  /* make not an obvious link, want whole element to seem clickable */
+  visibility: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.calendar th:not(:first-child),
+.calendar td:not(:first-child) {
+  width: calc((100% - 80px) / 7);
+}
+
+
+
+
+
+
+/* fffffffffffffffffffffffffffffffffffffffffffffffffffff  */
+
+@media (max-width: 768px) {
+
+  .showTitleBox {
+    font-size: 0.7em;
+    margin: auto;
+  }
+
+  .innerTitleElem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-width:50% !important;
+    
+  }
+
+  .showTitleImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--Light-Gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--Gold);
+    /* align vertically and horizantally center */
+    /* margin: auto; */
+  }
+
+  .showTitleImg img {
+    width: 10%;
+    height: auto;
+  }
+
+  #hostNamesList{
+    font-size: 1.4em;
+  }
+  .socials a{
+    font-size: 1em !important;
+  }
+  .hostNames {
+    font-size: 1em;
+  }
+  .iframeContainer {
+    width: 60% !important;
+    height: 100%;
+    flex: 0 0 100% !important;
+
+  }
+  .spotifyIframe{
+    width: 80% !important;
+  }
+}
+.spotifyIframe{
+    width: 100%;
+  }
+
+
+.iframeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.showTitleBox {
+  background-color: var(--Black);
+  color: var(--Gold);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 8px;
+}
+
+.showTitleBox div {
+  display: inline-block;
+  position: relative;
+
+}
+
+.showTitleImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--Light-Gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--Gold);
+}
+
+.showTitleImg img {
+  width: 100%;
+  height: auto;
+}
+.showTime-Hosts h3, .showTime-Hosts svg {
+  font-size: 24px;
+}
+.showTime-Hosts a {
+  font-size: 20px;
+}
+.showTime-Hosts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  /* padding-left: 1%;
+  padding-right: 4px; */
+  /* text-align: center; */
+
+  position: relative;
+  padding-bottom: 4%;
+  border-bottom: 1px solid var(--Black);
+}
+
+.showTime-Hosts div {
+  display: inline-block;
+  position: relative;
+  /* border: 1px solid var(--Black); */
+}
+
+.hostNames {
+  text-align: right;
+}
+
+.host-names ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.host-names li {
+  text-align: right;
+  padding-right: 10px;
+  font-size: 24px;
+}
+
+.socials ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.socials a {
+  text-align: left;
+  
+  padding-bottom: 4px;
+  text-decoration: none;
+  color: var(--AOK-Teal);
+}
+.socials li {
+  padding-bottom: 10px;
+}
+.socials svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  margin-right: 0.1em;
+  
+}
+
+.upNextText{
+  color: var(--Gold);
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align:center;
+}
+
+#showBlurb {
+  text-align: center;
+  padding: 20px;
+  line-height: 1.4;
+  font-size: 24px;
+  border-bottom: 1px solid var(--Black);
+}
+
+#showSelecter {
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid var(--Gold);
+  background-color: var(--Black);
+  color: var(--Gold);
+  font-size: 1em;
+}
+
+#theShowsInfoPage{
+  width: 95%;
+}
+
+  </style>
+</head>
+<body>
+
+<div id="theSchedule" >
+        <a id="clickableLive" class="special-event">
+          <h3 class="special-event" id="specialEventTitlebox"></h3>
+        </a>
+
+        <main><table class="calendar">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rows for each hour from 11:00 AM to 11:00 PM -->
+
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">10:00 AM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Morning%20Show&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Morning Show</p>
+      <p class="othTxt">WMBC Morning Show Team</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Morning%20Show&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Morning Show</p>
+      <p class="othTxt">WMBC Morning Show Team</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Morning%20Show&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Morning Show</p>
+      <p class="othTxt">WMBC Morning Show Team</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Morning%20Show&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Morning Show</p>
+      <p class="othTxt">WMBC Morning Show Team</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Morning%20Show&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Morning Show</p>
+      <p class="othTxt">WMBC Morning Show Team</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+
+
+
+
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">11:00 AM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Ms.%20Aaliyah&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Ms. Aaliyah</p>
+      <p class="othTxt">Aaliyah K.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Moose%20Tracks&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Moose Tracks</p>
+      <p class="othTxt">Amaya N.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Those%20Who%20Show&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Those Who Show</p>
+      <p class="othTxt">Spencer W.</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;BLEEDFAST&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">BLEEDFAST</p>
+      <p class="othTxt">DJ BLEEDFAST</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">12:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Steve%20Radio&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Steve Radio</p>
+      <p class="othTxt">Steve T.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;UFO&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">UFO</p>
+      <p class="othTxt">Bridgette S.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Omonti%E2%80%99s%20Opus%20with%20DJ%20Omontizay!&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Omonti’s Opus with DJ Omontizay!</p>
+      <p class="othTxt">DJ Omontizay</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Escriba!&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Escriba!</p>
+      <p class="othTxt">DJ Tiff, DJ Jo</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">1:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Ranting%20%20Raving&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Ranting & Raving</p>
+      <p class="othTxt">Angeles G </p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Luna%20Roja&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Luna Roja</p>
+      <p class="othTxt">Daniela S.</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;iRiE%20Corner%20Revivied&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">iRiE Corner Revivied</p>
+      <p class="othTxt">dj irie</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Mike's%20Iron%20Crypt&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Mike's Iron Crypt</p>
+      <p class="othTxt">Mike M.</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">2:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;DJ%20Tobi&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">DJ Tobi</p>
+      <p class="othTxt">Tobiloba P.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Funk%20Formula&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Funk Formula</p>
+      <p class="othTxt">Grace R.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Ace's%20Altar&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Ace's Altar</p>
+      <p class="othTxt">Arianna E.</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;marzi&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">marzi</p>
+      <p class="othTxt">rainydaze</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">3:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Things%20That%20Perk%20My%20Ears&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Things That Perk My Ears</p>
+      <p class="othTxt">Robert B.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;By%20The%20Decade&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">By The Decade</p>
+      <p class="othTxt">Alexander M.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;bewitched&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">bewitched</p>
+      <p class="othTxt">Castiel R.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Dean%20%26%20Nat&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Dean &amp; Nat</p>
+      <p class="othTxt">DJ Nat, Dean L.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;New%20Music%20Friday&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">New Music Friday</p>
+      <p class="othTxt">WMBC Staff!</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">4:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;DJ%20PJ&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">DJ PJ</p>
+      <p class="othTxt">DJ PJ</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;The%20Cozy%20Hour&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">The Cozy Hour</p>
+      <p class="othTxt">Danny N.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Jazz%20Hour&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Jazz Hour</p>
+      <p class="othTxt">Leo H.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;The%20Variety%20Experience&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">The Variety Experience</p>
+      <p class="othTxt">William S.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Immersive%20Introductions&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Immersive Introductions</p>
+      <p class="othTxt">Ish</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">5:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Crash%20Box&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Crash Box</p>
+      <p class="othTxt">Blake W.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Rubber%20Seoul&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Rubber Seoul</p>
+      <p class="othTxt">Chan K.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Arcadia&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Arcadia</p>
+      <p class="othTxt">DJ Ava</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Soul%20Society&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Soul Society</p>
+      <p class="othTxt">Gabriel D.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;FIRSTSOUND%3A%20Vocaloid%20Radio&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">FIRSTSOUND: Vocaloid Radio</p>
+      <p class="othTxt">Cameron</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">6:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Mangetsu%20Radio&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Mangetsu Radio</p>
+      <p class="othTxt">Miani F.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Retro%20Hour&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Retro Hour</p>
+      <p class="othTxt">Summer H.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Bye%20Sisters&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Bye Sisters</p>
+      <p class="othTxt">Will C., Lucien H.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Kouyata&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Kouyata</p>
+      <p class="othTxt">Joey M.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;blk.radio&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">blk.radio</p>
+      <p class="othTxt">dj blk.kamii</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">7:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;First%20Listen&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">First Listen</p>
+      <p class="othTxt">DJ Max</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;The%20Creative%20Variable&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">The Creative Variable</p>
+      <p class="othTxt">Rose M.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Metalworks&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Metalworks</p>
+      <p class="othTxt">Jack E.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;MIX(CEL)ANEOUS%20RADIO&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">MIX(CEL)ANEOUS RADIO</p>
+      <p class="othTxt">¡ceL!</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;The%20Rock%20Tumbler&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">The Rock Tumbler</p>
+      <p class="othTxt">Joshua A.</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">8:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Monday%20Night%20Metal&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Monday Night Metal</p>
+      <p class="othTxt">Raiyaan T., Donovan F.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;s0unds%20of%20silenc3&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">s0unds of silenc3</p>
+      <p class="othTxt">Aria S.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Henry's%20Jukebox&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Henry's Jukebox</p>
+      <p class="othTxt">Henry C.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Music%20And%20Whatnot&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Music And Whatnot</p>
+      <p class="othTxt">Kennedy R., Allene L.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;LBK%20Sounds&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">LBK Sounds</p>
+      <p class="othTxt">DJ LBK</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">9:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Gone%20Tomorrow%20Sound&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Gone Tomorrow Sound</p>
+      <p class="othTxt">Colin P.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;thirdeye&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">thirdeye</p>
+      <p class="othTxt">middeko</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;mama's%20orchard&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">mama's orchard</p>
+      <p class="othTxt">Michelle I., Sana N.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;Sahi's%20Semantics&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">Sahi's Semantics</p>
+      <p class="othTxt">Sahi S.</p>
+    </div>
+    </a>
+    </div></td>
+              <td class="show-cell" style="width: 20%; padding: 20px 0px;"><div class="show">
+    
+    <a role="button" onclick="changeToShowPage(&quot;SUBQTANEOUS&quot;)">
+    <div class="showElemDiv">
+      <p class="showElem sh_nm">SUBQTANEOUS</p>
+      <p class="othTxt">Sasha</p>
+    </div>
+    </a>
+    </div></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">10:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+            <tr>
+              <td class="hour-mark" style="width: 20%; padding: 20px 0px;">11:00 PM</td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+              <td style="width: 20%; padding: 20px 0px;"></td>
+            </tr>
+          </tbody>
+        </table>
+      </main></div>
+  
+</body>
+
+<script>
+// on page load:
+let doCull = true;
+document.addEventListener("DOMContentLoaded", function() {
+  if(doCull) {
+    doCull = false;
+    const rows = document.querySelectorAll(".calendar tbody tr");
+    rows.forEach(row => {
+      row.children[1].remove();
+      row.children[row.children.length - 1].remove();
+    });
+    //remove from calendar header
+    const header = document.querySelector(".calendar thead tr");
+    header.children[1].remove();
+    header.children[header.children.length - 1].remove();
+
+    // Set a flag to indicate that the adjustment has been made
+    window.mobileViewAdjusted = true;
+  }
+});
+
+</script>
+</html>
